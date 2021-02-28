@@ -1,0 +1,31 @@
+@zero:0;
+*{
+  padding: @zero;
+  margin: @zero;
+}
+ul{
+  list-style: none;
+}
+#warp{
+  width: 400px;
+  border: 1px solid #000000;
+  margin: 50px auto;
+  ul{
+    width: 100%;
+    li{
+      height: 40px;
+      width: 100%;
+      line-height: 40px;
+      // & 代表当前元素
+      &:hover{
+        background: pink;
+      }
+      &:nth-child(2):hover{
+        background: yellow;
+        
+      }
+    }
+
+  }
+}
+

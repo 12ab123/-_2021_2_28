@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="public/js/jquery-1.10.1.js"></script>
+<button id="btn">点我</button>
+
+<script>
+    $('#btn').click(function () {
+        //完整写法
+        $.ajax({
+            url:'http://localhost:3000/test',
+            method:'get',
+            data:{
+                name:'laijaindong',
+                age:18
+            },
+            success:function (result) {
+                console.log(result);
+            },
+            err:function (err) {
+                console.log(err);
+            }
+        })
+
+
+    })
+</script>
+</body>
+</html>

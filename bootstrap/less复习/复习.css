@@ -1,0 +1,62 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+ul {
+  list-style: none;
+}
+.height-2 {
+  height: 20px;
+}
+.alert {
+  height: 50px;
+  width: 80%;
+  margin: 0 auto;
+  background-color: #9999FF;
+}
+.lunbotu-aaa {
+  height: 200px;
+  width: 80%;
+  margin: 0 auto;
+  background-color: #999;
+  background-color: yellow;
+}
+.content {
+  width: 80%;
+  height: 300px;
+  border: solid 1px #ddd;
+  margin: 0 auto;
+}
+.content .item {
+  width: 25%;
+  height: 200px;
+  background-color: #987;
+  float: left;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+header {
+  height: 50px;
+  background-color: pink;
+}
+@media (min-width: 1200px) {
+  header {
+    background-color: red;
+  }
+}
+@media (max-width: 1200px) and (min-width: 992px) {
+  header {
+    background-color: yellow;
+  }
+}
+.center-show {
+  margin: 0 auto;
+}
+body {
+  background-color: deepskyblue;
+}
+.row {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+/*# sourceMappingURL=复习.css.map */

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery-1.10.1.js"></script>
+</head>
+<body>
+<img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/7cf034cf750738e7f33f77328230e8e2.jpg?thumb=1&w=3065&h=1150&f=webp&q=90" alt="">
+<script>
+    var $img=$('img')
+    console.log($img.width())
+    // window.onload 需要等外部的资源全部加载完成后 html js css img等，才会调用
+        // 只能绑定一个回调函数
+    window.onload=function (){
+        console.log('a'+$img.width())
+    }
+    window.onload=function (){
+        console.log('a2'+$img.width())
+    }
+
+    // $(function(){})  只需要等dom加载完成就可以调用
+         // 可以绑定多个回调函数
+    $(function (){
+        console.log('b'+$img.width())
+    })
+    $(function (){
+        console.log('b2'+$img.width())
+    })
+</script>
+</body>
+</html>

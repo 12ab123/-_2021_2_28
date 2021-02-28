@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        nav {
+            width: 800px;
+            margin: 100px auto;
+        }
+
+        li {
+            width: 100px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            border: solid #000 1px;
+            float: left;
+            margin-right: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .yinjie {
+            position: absolute;
+            left: 0;
+            bottom: -50px;
+            width: 100%;
+            height: 50px;
+            transition: 1s;
+            background-color: rgba(232,231,251,0.7);
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <ul>
+        <li>
+            男装
+            <div class="yinjie"></div>
+        </li>
+        <li>
+            女装
+            <div class="yinjie"></div>
+        </li>
+        <li>
+            童装
+            <div class="yinjie"></div>
+        </li>
+        <li>
+            家居
+            <div class="yinjie"></div>
+        </li>
+        <li>
+            电脑
+            <div class="yinjie"></div>
+        </li>
+        <li>
+            电器
+            <div class="yinjie"></div>
+        </li>
+        <li>
+            冰箱
+            <div class="yinjie"></div>
+        </li>
+    </ul>
+</nav>
+</body>
+<script>
+    var lis = document.querySelectorAll('li');
+    lis.forEach(function (li) {
+        li.addEventListener('mouseenter', function () {
+            var yinjie = li.querySelector('.yinjie');
+            yinjie.style.bottom = 0;
+        });
+        li.addEventListener('mouseleave', function () {
+            var yinjie = li.querySelector('.yinjie');
+            yinjie.style.bottom = '-50px';
+        })
+    })
+</script>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //最后一个then处理的是第一个then处理完的结果
+    new Promise((resolve, reject)=>{
+        resolve(1)
+    }).then(
+        value => {return Promise.reject(2)},
+        reason => {return Promise.resolve(3)}
+    ).then(
+        value => console.log('onResolved',value),
+        reason => console.log('onRejected',reason)
+    )
+
+
+    //第一个then和最后一个then处理的都是p的结果
+    const p=new Promise((resolve, reject)=>{
+        resolve(1)
+    })
+    p.then(
+        value => console.log(1)
+    )
+    p.then(
+        value => console.log(1)
+    )
+
+
+</script>
+</body>
+</html>

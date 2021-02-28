@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button onclick="testGet()">发送get请求</button>
+<button onclick="testPost()">发送post请求</button>
+<button onclick="testPut()">发送put请求</button>
+<button onclick="testDelete()">发送delete请求</button>
+<script src="./node_modules/axios/dist/axios.js"></script>
+<script>
+    //设置axios默认的基础地址(再调用axios方法时,不需要写全地址,只需要在基础地址上面添加即可)
+    axios.defaults.baseURL = 'http://localhost:3000';
+
+
+    //方法1
+    // function testGet() {
+    //     axios({
+    //         method: 'get',
+    //         // url: 'http://localhost:3000/posts',
+    //         url: 'posts',
+    //         //query参数可以单独指定,而params参数只能写在路径中
+    //         params:{            //指定query参数(等价于http://localhost:3000/posts?id=2)
+    //             id:5
+    //         }
+    //     }).then(
+    //         response => {
+    //             console.log(response.data, response.status, response.statusText)
+    //         },
+    //         err => {
+    //             console.log(err.message);
+    //         }
+    //     )
+    // }
+
+    //方法2
+    function testGet() {
+        //第一个参数为路径
+        //第二个参数为配置对象
+        axios.get('/posts',{
+            params:{
+                id:6
+            }
+        }).then(
+            response=>{
+                console.log(response.data, response.status, response.statusText)
+            },
+            err => {
+                console.log(err.message);
+            }
+        )
+    }
+
+    function testPost() {
+        // axios({
+        //     method: 'POST',
+        //     url: '/posts',
+        //     data:{              //指定请求体参数数据
+        //         title:'qqq',
+        //         author:'eee'
+        //     }
+        // })
+        //第一个参数为路径
+        //第二个参数为请求体
+        axios.post('/posts',{title:'ggg',author:'fff'}).then(
+            response => {
+                console.log(response.data, response.status, response.statusText)
+            },
+            err => {
+                console.log(err.message);
+            }
+        )
+    }
+
+    function testPut() {
+        // axios({
+        //     method: 'PUT',
+        //     url: '/5',
+        //     data:{//指定请求体参数数据
+        //         title:'111',
+        //         author:'222'
+        //     }
+        // })
+        axios.put('/posts/6',{title:123,author:'456'}).then(
+            response => {
+                console.log(response.data, response.status, response.statusText)
+            },
+            err => {
+                console.log(err.message);
+            }
+        )
+    }
+
+    function testDelete() {
+        axios({
+            method: 'DELETE',
+            url: '/5',
+        }).then(
+            response => {
+                console.log(response.data, response.status, response.statusText)
+            },
+            err => {
+                console.log(err.message);
+            }
+        )
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+ul{
+  list-style: none;
+}
+
+.height-2{
+  height: 20px;
+}
+
+//变量申明
+@base-color:pink;
+
+
+
+//变量选择器
+@remind:.alert;
+@{remind}{
+  height: 50px;
+  width: 80%;
+  .center-show();
+  background-color: #9999FF;
+  .vip-show();
+}
+
+
+//变量拼接
+@v1:lunbotu;
+@v2:aaa;
+@swiper-container:~'.@{v1}-@{v2}';
+@{swiper-container}{
+  height: 200px;
+  width: 80%;
+  .center-show();
+  background-color: #999;
+  .swiper-show(yellow)
+}
+
+
+
+//嵌套
+.content{
+  width: 80%;
+  height: 300px;
+  border: solid 1px  #ddd;
+  .center-show();
+
+  .item{
+    width: 25%;
+    height: 200px;
+    background-color: #987;
+    float: left;
+    padding: 0 15px;
+    box-sizing: border-box;
+  }
+}
+
+
+
+//媒体查询
+header{
+  height: 50px;
+  background-color: @base-color;
+
+  @media (min-width: 1200px){
+    background-color: red;
+  }
+
+  @media (max-width: 1200px) and (min-width: 992px){
+    background-color: yellow;
+  }
+}
+
+
+//混入(类似于函数)
+.center-show{
+  margin: 0 auto;
+}
+
+
+
+//条件混入
+@vip:2;
+//当变量@vip的值等于1时，该混入会被执行
+.vip-show() when (@vip=1){
+  background-color: gold;
+}
+
+
+//参数混入
+.swiper-show(@color){
+  background-color: @color;
+}
+
+
+//输出带选择器的css样式
+.body-show(){
+  body{
+    //background-color: #eee;
+  }
+}
+.body-show();
+
+
+
+//嵌套
+.mixin-a(){
+  .mixin-b(){
+    body{
+      background-color: deepskyblue;
+    }
+  }
+  .mixin-b();
+}
+.mixin-a();
+
+
+
+.row{
+  margin-left: -15px;
+  margin-right:-15px ;
+}
+

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        canvas {
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+<canvas></canvas>
+</body>
+<script>
+    var canvas = document.querySelector('canvas');
+    canvas.width = 600;
+    canvas.height = 400;
+    var ctx = canvas.getContext('2d');
+
+    //绘制中心线
+    ctx.beginPath();
+    ctx.moveTo(100, 0);
+    ctx.lineTo(100, 1000);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(0, 100);
+    ctx.lineTo(1000, 100);
+    ctx.stroke();
+
+    //相对于中心线水平对齐
+    ctx.textAlign = 'start';
+
+    //基线对齐
+    ctx.textBaseline = 'bottom';
+    //设置文字样式
+    ctx.font = 'bold 30px 宋体';
+    //填充文字
+    //在位置100,100的地方放入文字
+
+    ctx.fillText('i love you', 100, 100);
+
+    //镂空文字
+    ctx.strokeText('I LOVE YOU', 100, 200);
+</script>
+</html>

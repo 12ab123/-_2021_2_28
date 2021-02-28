@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery-1.10.1.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .banner {
+            position: relative;
+            width: 500px;
+            height: 300px;
+            margin: 50px auto;
+            overflow: hidden;
+        }
+
+        .banner .list {
+            width: 5000px;
+            height: 300px;
+            position: absolute;
+            left: -500px;
+            /*display: flex;*/
+            /*position: relative;*/
+        }
+
+        .banner .list li {
+            float: left;
+            width: 500px;
+            height: 300px;
+            overflow: hidden;
+
+
+        }
+
+        .banner .list li img {
+            display: block;
+            width: 500px;
+            height: 300px;
+        }
+
+        .banner span {
+            width: 50px;
+            height: 35px;
+            background-color: #cccccc;
+            top: 50%;
+            transform: translateY(-50%);
+            position: absolute;
+            font-size: 30px;
+            line-height: 35px;
+            text-align: center;
+            border-radius: 5px;
+            opacity: 0;
+            transition: opacity 500ms;
+        }
+
+        .banner .span1 {
+            left: 0;
+        }
+
+        .banner .span2 {
+            right: 0;
+        }
+
+        .banner .dian {
+            display: flex;
+            position: absolute;
+            bottom: 0;
+            margin-bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .banner .dian li {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: #cccccc;
+            margin-right: 7px;
+
+        }
+
+        .banner .dian .on {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="banner">
+    <ul class="list">
+        <li><img src="img/6.jpg" alt=""></li>
+        <li><img src="img/1.jpg" alt=""></li>
+        <li><img src="img/2.jpg" alt=""></li>
+        <li><img src="img/3.jpg" alt=""></li>
+        <li><img src="img/4.jpg" alt=""></li>
+        <li><img src="img/5.jpg" alt=""></li>
+        <li><img src="img/6.jpg" alt=""></li>
+        <li><img src="img/1.jpg" alt=""></li>
+
+    </ul>
+    <span class="span1"><</span>
+    <span class="span2">></span>
+    <ul class="dian">
+        <li class="on"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<script>
+    var box = document.querySelector('.banner');
+    var spanlist = document.querySelectorAll('span');
+    box.onmouseover = function () {
+        for (var i = 0; i < spanlist.length; i++) {
+            spanlist[i].style.opacity = 0.5;
+        }
+    };
+    box.onmouseout = function () {
+        for (var i = 0; i < spanlist.length; i++) {
+            spanlist[i].style.opacity = 0;
+        }
+    };
+
+    // var dianlist=document.querySelectorAll('.dian>li');
+    // dianlist[0].style.backgroundColor='#fff';
+    // for(var i=0;i<dianlist.length;i++){
+    //     dianlist[i].onclick=function () {
+    //         for(var j=0;j<dianlist.length;j++){
+    //             dianlist[j].style.backgroundColor='#ccc';
+    //         }
+    //         this.style.backgroundColor='#fff';
+    //     }
+    // }
+</script>
+
+<script>
+    // 左右按钮
+    var $leftD = $('.span1')
+    var $rightD = $('.span2')
+
+    // 图片容器
+    var imgBar = $('.list')
+
+    // 显示区域
+    var $banner = $('.banner')
+
+    // 小圆点
+    var $points = $('.dian li')
+
+    // 图片的数量
+    var img_num = $points.length
+
+    // 图片宽度
+    var PAGE_WIDTH = 500;
+
+    // 动画总时长
+    var time = 800
+
+    // 动画单位时长
+    var itemTime = 8
+
+    // 上一次的小圆点索引
+    var oldIndex = 0
+
+    // 动画正在执行中的标识变量
+    var isMove = false
+
+
+    $leftD.click(function () {
+        nextPage(false)
+    })
+
+    $rightD.click(function () {
+        nextPage(true)
+    })
+    // 点击小圆点翻页
+    $points.click(function () {
+        nextPage($(this).index())
+    })
+
+    function nextPage(next) {
+        if (isMove) {
+            return
+        }
+        isMove = true
+        // 判断传入的类型
+        if (typeof next == 'boolean') {
+            // 偏移量
+            var offset = next ? -PAGE_WIDTH : PAGE_WIDTH;
+        } else {
+            var offset = -(next - oldIndex) * 500;
+
+        }
+
+
+        // 动画总时长/每帧时长=总帧数       总偏移量/总帧数=每帧偏移量
+        var itemOffset = offset / (time / itemTime)
+        var left = imgBar.position().left
+        // 获取移动后的位置
+        var targetLeft = left + offset
+        var timer = setInterval(function () {
+            left += itemOffset
+            if (left == targetLeft) {
+                // 条件判断成立后，会先清除定时器，然后将left的值继续输入给css执行完，执行完后，不会再执行定时器
+                isMove = false;
+                clearInterval(timer)
+                left = Math.round(left)
+                // 在每一次图片执行完成时判断是否修正位置
+                if (left == 0) {
+                    // left=-(PAGE_WIDTH*(img_num+1))
+                    left = -3000
+                } else if (left == -3500) {
+                    left = -500
+                }
+            }
+            imgBar.css('left', left)
+        }, itemTime)
+        upDate(next)
+
+
+    }
+
+    // 更新小圆点
+    function upDate(next) {
+        if (typeof next == 'boolean') {
+            var index = next ? oldIndex + 1 : oldIndex - 1;
+        } else {
+            var index = next;
+        }
+
+        // 小圆点索引值边界判断
+        if (index > ($points.length - 1)) {
+            index = 0;
+
+        } else if (index < 0) {
+            index = $points.length - 1
+        }
+        $points[oldIndex].className = '';
+        $points[index].className = 'on';
+        oldIndex = index
+    }
+
+    // 自动轮播
+    var autoTimer = setInterval(function () {
+        nextPage(true)
+    }, 4000)
+
+    // 取消自动轮播
+    $banner.hover(function () {
+        clearInterval(autoTimer)
+    }, function () {
+        autoTimer = setInterval(function () {
+            nextPage(true)
+        }, 4000)
+    })
+
+</script>
+
+</body>
+</html>

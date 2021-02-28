@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <title>Title</title>
+    <style>
+        *{
+             padding: 0;
+             margin: 0;
+        }
+        ul{
+             list-style: none;
+        }
+        #box{
+            width: 200px;
+            height: 200px;
+            border: 1px solid #000;
+            overflow: hidden;
+            position: relative;
+        }
+        img{
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <img src="../img/t1.jpg" alt="">
+</div>
+</body>
+<script>
+    var box=document.getElementById('box');
+    var img=document.querySelector('img');
+
+    box.addEventListener('touchstart',function (e) {
+    //    获取触摸时的尺寸
+        box.x=e.targetTouches[0].clientX;
+        box.y=e.targetTouches[0].clientY;
+        box.left=img.offsetLeft;
+        box.top=img.offsetTop;
+
+    });
+
+    box.addEventListener('touchmove',function (e) {
+        this.mx=e.targetTouches[0].clientX;
+        this.my=e.targetTouches[0].clientY;
+        this.newLeft=this.mx-this.x+this.left;
+        this.newTop=this.my-this.y+this.top;
+
+        //边界检测
+        if(this.newLeft>=0){
+            this.newLeft=0;
+        }else if(this.newLeft<=box.clientWidth-img.clientWidth){
+            this.newLeft=box.clientWidth-img.clientWidth
+        }
+
+        if(this.newTop>=0){
+            this.newTop=0;
+        }else if(this.newTop<=box.clientHeight-img.clientHeight){
+            this.newTop=box.clientHeight-img.clientHeight;
+        }
+        img.style.left=this.newLeft+'px';
+        img.style.top=this.newTop+'px';
+    })
+</script>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    window.addEventListener('keydown',function (e) {
+        console.log(e.keyCode);
+        //获取当前按键的类型
+        console.log(e);
+    //    如果是CTRL,e中的属性ctrlKey: true
+    //    如果是其他按键,e中的属性ctrlKey: false
+    //    所以判断组合键的方式为
+        if(e.keyCode==67 && e.ctrlKey==true){
+            // alert('你按下了ctrl+c');
+            e.preventDefault();
+        }
+    })
+    window.oncontextmenu=function (e) {
+        e.preventDefault();
+    }
+</script>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../jquery-1.10.1.js"></script>
+    <script type="text/javascript">
+        // attr
+        //    输入一个参数为读
+        //    输入两个参数为写
+        // attr     用来操作标签自定义属性，比如title，class，id，name
+        // prop     用来操作元素固有属性  布尔值属性
+        $(function (){
+            // 读取第一个div的title值
+            console.log($('div:first').attr('title'))
+            // 给所有div设置一个name属性，值为gege
+            $('div').attr('name','gege')
+            // 删除所有div的title属性
+            $('div').removeAttr('title')
+            // 给所有div设置一个class属性，值为box
+            $('div').attr('class','box')
+            // 给所有div添加一个class属性，值为box1
+            $('div').addClass('box1')
+            // 移出所有div的class属性，值为box
+            $('div').removeClass('box')
+            // 查看最后一个li的文本
+            console.log($('ul>li:last').html())
+            // 设置第一个li的文本为zzzzzz
+            $('ul>li:first').html('<h1>zzzzzz</h1>')
+
+            // 全选
+            $('button:first').click(function (){
+                $(':checkbox').prop('checked',true)
+            })
+            // 全不选
+            $('button:last').click(function (){
+                $(':checkbox').prop('checked',false)
+            })
+        })
+    </script>
+</head>
+<body>
+    <div title="刘辟"></div>
+    <div></div>
+    <div></div>
+<ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li>aaaaaa</li>
+</ul>
+
+    <input type="checkbox">
+    <input type="checkbox">
+<button>全选</button>
+<button>全不选</button>
+</body>
+</html>

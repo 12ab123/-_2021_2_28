@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="node_modules/axios/dist/axios.js"></script>
+<script>
+    axios.defaults.baseURL='http://localhost:3000'
+    /*
+        请求拦截器
+            1. 每次点击发送请求时,先执行请求拦截器,再发送请求
+            2. 作用:
+                    对请求的配置做一些处理
+                    对请求进行检查,如果不满意条件不发请求
+
+
+        响应拦截器
+            1. 得到响应后执行响应拦截器(数据发送到客户端,先执行响应拦截器,再得到响应)
+            2. 作用:
+                    对请求成功的数据进行一些处理
+                    对请求失败的数据进行一些处理
+     */
+
+    //添加请求拦截器
+    axios.interceptors.request.use(function (config) {      //请求成功
+        console.log('req interceptors1 onResolved',config);
+        return config           //必须返回config
+    })
+    axios.interceptors.request.use(function (config) {      //请求成功
+        console.log('req interceptors2 onResolved');
+        return config           //必须返回config
+    })
+
+    //添加响应拦截器
+    axios.interceptors.response.use(function (response) {
+        console.log('res interceptors1 onResolved');
+        return response
+    },
+    function (error) {
+        console.log('res interceptors1 onRejected');
+        return Promise.reject(error)
+    })
+
+
+    axios.interceptors.response.use(function (response) {
+            console.log('res interceptors2 onResolved');
+            return response
+        },
+        function (error) {
+            console.log('res interceptors2 onRejected');
+            return Promise.reject(error)
+        })
+
+    axios.get('/posts').then(
+        response=>{
+            console.log('onResolved');
+        },error=>{
+            console.log('onRejected');
+        }
+    )
+</script>
+</body>
+</html>

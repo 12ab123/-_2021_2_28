@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="initial-scale=1">
+    <title>Title</title>
+    <style>
+        #box{
+            width: 3rem;
+            height: 3rem;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+</body>
+<script>
+    var fontsize=50;
+    document.documentElement.style.fontSize=fontsize+'px';
+
+    var dpr=window.devicePixelRatio;
+
+    var initialScale=1/dpr;
+
+    var meta=document.querySelector('meta[name=viewport]');
+
+    // 屏幕放大
+    meta.content='initial-scale='+initialScale;
+
+    // 内容放大
+    var newFontSize=fontsize*dpr;
+    document.documentElement.style.fontSize=newFontSize+'px';
+
+    console.log(window.devicePixelRatio);
+    console.log(document.documentElement.clientWidth);
+</script>
+</html>

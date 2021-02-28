@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script  type="text/javascript">
+        console.log('-------------用途1: rest可变参数-----------------')
+        function fun(a,...values){
+            //arguments用来收集实参的伪数组
+            //伪数组: 有length属性,可以通过下摆哦获取对应的值,但是没有数组的一般方法(push filter map)
+            console.log(arguments)
+
+            //它比形参更加灵活,可以传入多个形参,而且values是一个数组
+            console.log(values)
+        }
+        fun(1,2,3)
+
+
+
+        console.log('-------------用途1: 扩展运算符-----------------')
+        let arr=[1,6]
+        let arr2=[2,3,4,5]
+        let arr3=[1,...arr2,6]
+        console.log(arr3)           //[1,2,3,4,5,6]
+        //...运算符去拆包指定数组
+        console.log(...arr3)
+    
+    </script>
+</body>
+</html>

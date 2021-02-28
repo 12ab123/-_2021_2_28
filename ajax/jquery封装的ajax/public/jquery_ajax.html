@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jquery_ajax_get</title>
+
+</head>
+<body>
+<h1>该页面是测试jquery_ajax_get</h1>
+<button id="btn">点我发送jquery_get请求</button>
+<button id="btn1">点我发送jquery_post请求</button>
+<script src="./js/jquery-1.10.1.js"></script>
+<script>
+    let btn1=$('#btn')
+    let btn2=$('#btn1')
+    btn1.click(function () {
+        //使用jquery发送get请求 ----- 完整版
+        // $.ajax('http://localhost:3000/jquery_get',{
+    //  //     url:'http://localhost:3000/jquery_get',
+        //     method:'get',           //发送请求的内容
+        //     data:{name:'kebi',age:13},        //发送请求携带的数据
+        //     //成功的回调
+        //     success:function (result) {
+        //         console.log(result);
+        //     },
+        //     //失败的回调
+        //     err:function (err) {
+        //         console.log(err);
+        //     }
+        // })
+
+        //使用jquery发送get请求 ----- 精简版
+        $.get('http://localhost:3000/jquery_get',{name:'kebi',age:13},function (data,statusText,xhr) {
+            console.log(data);
+        })
+
+
+
+    })
+
+
+
+    btn2.click(function () {
+        //使用jquery发送post请求 ------ 完整版
+        // $.ajax({
+        //     url:'http://localhost:3000/jquery_get',
+        //     method:'post',           //发送请求的内容
+        //     data:{name:'kebi',age:13},        //发送请求携带的数据
+        //     //成功的回调
+        //     success:function (result) {
+        //         console.log(result);
+        //     },
+        //     //失败的回调
+        //     err:function (err) {
+        //         console.log(err);
+        //     }
+        // })
+
+
+        //使用jquery发送post请求 ----- 精简版
+        $.post('http://localhost:3000/jquery_get',{name:'kebi',age:13},function (data,statusText,xhr) {
+            console.log(data);
+        })
+    })
+
+
+
+
+
+
+</script>
+</body>
+</html>

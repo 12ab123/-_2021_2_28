@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text">
+<script>
+    let inputNode=document.querySelector('input');
+    inputNode.onblur=function () {
+        localStorage.setItem('data',inputNode.value)
+    }
+</script>
+</body>
+</html>

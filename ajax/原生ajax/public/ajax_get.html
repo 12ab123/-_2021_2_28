@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原生ajax_get</title>
+</head>
+<body>
+<h1>该页面是测试实验原生js发生get请求</h1>
+<button>aaaa</button>
+<div class="demo"></div>
+
+<script>
+    btn=document.querySelector('button')
+    btn.onclick=function(){
+        //1.实例化一个XMLHttpRequest对象
+        let xhr = new XMLHttpRequest()
+
+        //2.绑定一个名为onreadystatechange事件
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                //如果进入此判断,意味着: 请求成功了,数据已经回来了
+
+                console.log(xhr.response);
+                let demo=document.querySelector('.demo')
+                demo.innerHTML=xhr.response
+            }
+        }
+
+        //3.调用open方法---------- 用什么方法发?   给谁发?   带什么过去?
+        /*
+            解决ie兼容性:
+                在ie中,当你第一次访问指定网页获取内容时,他会访问服务器,当你再次访问指定地址获取
+                内容时,他会走缓存,所以当你该服务器的代码时,如果不清理掉ie的缓存,ie不会访问服务器,而是
+                在缓存中找get请求
+                解决办法: 改变访问路径
+
+         */
+        xhr.open('get', 'http://localhost:3000/ajax_get?name=laijiandong&age=19&'+Date.now())
+
+        //4.调用send方法 ------ 发送请求
+        xhr.send()
+    }
+
+
+</script>
+</body>
+</html>

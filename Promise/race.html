@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    const p1 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(1)
+        }, 1000)
+    })
+    const p2 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            reject(2)
+        }, 1000)
+    })
+    const p3 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(3)
+        }, 500)
+    })
+    //输入对个promise对象,返回最先执行完的对象,判断最先执行完的对象的状态(resolved或rejected),做出对应的回调
+    Promise.race([p1, p2, p3]).then(
+        value => {
+            console.log(value);
+        }
+    )
+</script>
+</body>
+</html>

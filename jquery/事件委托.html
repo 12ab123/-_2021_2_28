@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery-1.10.1.js"></script>
+</head>
+<body>
+<ul>
+    <li>11</li>
+    <li>22</li>
+    <li>33</li>
+</ul>
+<button>添加新的li</button>
+<button>删除ul上的事件委托的监听器</button>
+
+<script>
+    var $btn1=$('button:first')
+
+    // 新增li
+    $btn1.click(function (){
+        $('<li>我会新增的li</li>').appendTo($('ul'))
+    })
+
+    // 点击li使li变为红色
+    // $('ul').delegate('li','click',function (){
+    //     $(this).css('backgroundColor','red')
+    // })
+
+    $('button:last').click(function (){
+        $('ul').undelegate()
+    })
+
+    $('ul').on('click','li',function (){
+        $(this).css('backgroundColor','red')
+    })
+
+</script>
+</body>
+</html>

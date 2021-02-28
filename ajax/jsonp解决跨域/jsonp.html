@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="btn">点我</button>
+<script>
+
+    /*
+        关于jsonp解决跨域
+            1.原理: 利用了script标签发请求不受同源策略的限制,不会产生跨域问题
+            2.套路: 动态的噶偶见script节点,利用节点的src属性,发出get请求,从而绕开ajax引擎
+            3.弊端:
+                    1. 只能解决get请求跨域问题
+                    2. 后端工程师必须配合前端
+            4.备注: 前端定义函数,后端"调用"
+
+     */
+    let btn=document.querySelector('#btn')
+    btn.onclick=function () {
+            //1. 准备一个回调函数
+        window.peiqi=function (a) {
+            console.log(a);
+        }
+        //2. 创建节点
+            const scriptNode=document.createElement('script')
+            //3. 为节点指定路径
+            scriptNode.src='http://localhost:3000/test?callback=peiqi'
+            //4. 将节点插入到页面
+            document.body.appendChild(scriptNode)
+    }
+
+
+</script>
+</body>
+</html>

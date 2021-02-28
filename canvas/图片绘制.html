@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        canvas {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+<canvas></canvas>
+</body>
+<script>
+    var canvas = document.querySelector('canvas');
+    canvas.width = 600;
+    canvas.height = 500;
+    var ctx = canvas.getContext('2d');
+
+    //图片操作
+    //1.创建图片对象
+    //方法1:创建图片对象
+    //方法2:使用DOM创建节点
+    // var img = new Image;
+    var img=document.createElement('img');
+    //2.设置src
+    img.src = '../img/t1.jpg';
+    //3.给图片绑定加载完毕事件
+    img.onload = function () {
+        //参数1    图片对象
+        //参数2    水平起始位置
+        //参数3    垂直起始位置
+        //参数4    图片宽度
+        //参数5    图片高度
+        ctx.drawImage(img, 0, 0, 600, img.height * 600 / img.width);            // 画
+    }
+</script>
+</html>

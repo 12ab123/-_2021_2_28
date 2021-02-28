@@ -1,0 +1,11 @@
+{
+  "name": "ajax",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "jquery": "^3.5.1",
+    "mongoose": "^5.11.13"
+  }
+}

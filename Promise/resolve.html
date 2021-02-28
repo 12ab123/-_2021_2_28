@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let b=Promise.resolve('123')            //当传入的类型不是promise对象类型时,为正确
+    console.log(b);
+
+    let c=Promise.resolve(new Promise((resolve, reject) => {        //当传入的对象类型为promise类型时,由结果决定
+        reject(123)
+    }))
+    console.log(c);
+</script>
+</body>
+</html>

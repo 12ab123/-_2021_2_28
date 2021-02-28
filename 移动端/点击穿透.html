@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="https://cdn.bootcss.com/holder/2.9.6/holder.min.js"></script>
+    <title>Bootstrap 101 Template</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .swiper {
+            width: 80%;
+            height: 100px;
+            background-color: #999;
+            margin: 0 auto;
+        }
+
+        .height-5 {
+            height: 50px;
+        }
+
+        #nav {
+            width: 80%;
+            height: 50px;
+            margin: 0 auto;
+            display: flex;
+        }
+
+        .item {
+            overflow: hidden;
+            width: 60px;
+            height: 60px;
+        }
+
+        .item img {
+            border-radius: 50%;
+        }
+
+        #zhezhao {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #000;
+            opacity: 0.5;
+        }
+
+        .content {
+            color: white;
+            width: 50%;
+            height: 100px;
+            margin: 200px auto;
+            /*background-color: white;*/
+            text-align: center;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+
+
+    <div class="height-5"></div>
+    <div class="height-5"></div>
+    <div class="swiper"></div>
+    <div class="height-5"></div>
+    <div id="nav">
+        <div class="item"><a href="http://m.atguigu.com"><img data-src="holder.js/50x50" alt=""></a></div>
+        <div class="item"><a href="http://m.atguigu.com"><img data-src="holder.js/50x50" alt=""></a></div>
+        <div class="item"><a href="http://m.atguigu.com"><img data-src="holder.js/50x50" alt=""></a></div>
+        <div class="item"><a href="http://m.atguigu.com"><img data-src="holder.js/50x50" alt=""></a></div>
+        <div class="item"><a href="http://m.atguigu.com"><img data-src="holder.js/50x50" alt=""></a></div>
+
+    </div>
+
+    <div id="zhezhao">
+        <div class="content">
+            <div class="remind">充值成功</div>
+            <button>关闭</button>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    var btn = document.querySelector('button');
+    var zhezhao = document.getElementById('zhezhao');
+    btn.addEventListener('touchend', function (event) {
+        //当我们点击按钮时,按钮下方的a标签的click事件也会触发
+        zhezhao.style.display = 'none';
+        //    阻止默认行为
+        //    方法1
+        //     event.preventDefault();
+    });
+
+    //方法2
+    // document.documentElement.addEventListener('touchstart',function (e) {
+    //     e.preventDefault();
+    // },{
+    //     // 第三个参数
+    //     // 使e.preventDefault()生效,默认为true;
+    //     passive:false
+    // })
+
+    // 方法3(建议使用)
+    //    在最外层添加一个包裹器
+    var app = document.getElementById('app');
+    app.addEventListener('touchstart', function (event) {
+        event.preventDefault();
+    })
+
+    var p=document.querySelectorAll('p');
+    p.addEventListener('touchstart',function (event) {
+        event.stopPropagation();
+    })
+
+    var input=document.querySelectorAll('input[type="text"]');
+    input.addEventListener('touchstart',function (event) {
+        this.focus();
+        event.stopPropagation();
+    })
+    app.addEventListener('touchstart',function (event) {
+        input.blur();
+    })
+</script>
+</html>

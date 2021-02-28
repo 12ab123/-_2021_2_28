@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas{
+            border: 1px solid #cccccc;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="600px" height="500px"></canvas>
+</body>
+<script>
+    //获取元素对象
+    var canvas=document.querySelector('canvas');
+
+    //获取渲染的上下文对象
+    var ctx=canvas.getContext('2d');   //  2d  webgl(3d)  webgl2
+
+    //绘制图形
+    // 第一个参数为水平方向的起始位置
+    // 第二个参数为垂直方向的起始位置
+    // 第三个参数为绘制的宽度
+    // 第四个参数为绘制的高度
+    ctx.fillRect(100,50,200,100);
+</script>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数节流</title>
+    <style>
+        body {
+            height: 2000px;
+        }
+    </style>
+</head>
+<body>
+<script>
+    let canLog = true;
+    document.body.onscroll = function () {
+        if (canLog) {
+            console.log(1);
+            canLog = false;
+            setTimeout(function () {
+                canLog = true;
+            }, 2000)
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button>点击</button>
+<script>
+    const btn = document.querySelector('button')
+    btn.onclick = function () {
+        let p = new Promise((resolve, reject) => {
+            //1. 创建对象
+            const xhr=new XMLHttpRequest()
+            //2. 初始化
+            xhr.open('get','http://localhost:3000/get_ajax?name=laijiandong&age=18')
+            //3. 发送
+            xhr.send()
+            //4. 处理响应结果
+            xhr.onreadystatechange=function () {
+                if(xhr.readyState===4){
+                    if(xhr.status<300){
+                        resolve(xhr.response)
+                    }else{
+                        reject(xhr.status)
+                    }
+                }
+            }
+
+
+        })
+        p.then(
+            value => {
+                console.log(value);
+            },
+            reason => {
+                console.log(reason);
+            }
+        )
+    }
+</script>
+</body>
+</html>

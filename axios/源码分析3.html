@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>axios拦截器源码分析</title>
+</head>
+<body>
+<script>
+    //构造函数
+    function Axios(config) {
+        this.config=config
+        this.interceptors={
+            request:new InterceptorManager(),
+            response:new InterceptorManager()
+        }
+    }
+
+    Axios.prototype.request=function (config) {
+        //创建一个promise对象
+        let promise=Promise.resolve(config)
+
+        //创建一个数组
+        let chains=[dispatchRequest,undefined]
+
+        //将请求拦截器压入到数组chains的前面
+        this.interceptors.request.handlers.forEach(item=>{
+            chains.unshift(item.fulfilled,item.rejected)
+        })
+        this.interceptors.response.handlers.forEach(item=>{
+            chains.push(item.fulfilled,item.rejected)
+        })
+
+        //遍历
+        while (chains.length){
+            promise=promise.then(chains.shift(),chains.shift())
+        }
+
+        return promise
+    }
+    function dispatchRequest() {
+        return new Promise((resolve, reject) => {
+            resolve({
+                status:200,
+                statusText:'OK'
+            })
+        })
+    }
+
+
+    //拦截器管理器构造函数
+    function InterceptorManager() {
+        this.handlers=[];
+    }
+    InterceptorManager.prototype.use=function (fulfilled,rejected) {
+        this.handlers.push({
+            fulfilled,rejected
+        })
+    }
+
+
+
+    let context=new Axios({})
+
+    //创建axios函数
+    let axios=Axios.prototype.request.bind(context)
+    Object.keys(context).forEach(key=>{
+        axios[key]=context[key]
+    })
+
+
+
+    axios.interceptors.request.use(function (response) {
+        console.log(111);
+        return response
+    })
+
+    axios.interceptors.request.use(function (response) {
+        console.log(222);
+        return response
+    })
+
+    axios.interceptors.response.use(function (response) {
+        return response
+    },function (error) {
+        return Promise.reject(error)
+    })
+
+
+    axios({
+        method:'get',
+        url:'http://localhost:3000'
+    }).then(
+        repsonse=>{
+            console.log(repsonse);
+        }
+    )
+
+
+</script>
+</body>
+</html>

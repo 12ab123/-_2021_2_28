@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="iconfont/font-awesome-4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<!--    包裹容器-->
+<div class="warp">
+    <header id="header">
+        <div class="header-bar">
+<!--        logo-->
+        <h1 class="logo">
+            <a href="javascript:;"><img src="img/logo.png" alt=""></a>
+        </h1>
+
+        <nav class="nav">
+            <ul>
+            <li>
+                <a href="javascript:;">
+                    <div class="up fa fa-heart" style="display: block;margin-top: 3px"></div>
+                    <div class="down fa fa-heart" style="display: block;margin-top: 3px"></div>
+                </a>
+            </li>
+
+            <li>
+                <a href="javascript:;">
+                    <div class="up">Course</div>
+                    <div class="down">Course</div>
+                </a>
+            </li>
+                <li>
+                    <a href="javascript:;">
+                        <div class="up">Works</div>
+                        <div class="down">Works</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <div class="up">About</div>
+                        <div class="down">About</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <div class="up">Team</div>
+                        <div class="down">Team</div>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        </div>
+        <div class="arrow">
+
+        </div>
+    </header>
+    
+    <section id="content">
+        <ul class="list">
+            <li><div class="home">
+                <ul class="homeList">
+                    <li class="leftShow">
+                        <div class="commonTitle">asasas</div>
+                    </li>
+                    <li class="rightHide">
+                        <div class="commonTitle">q</div>
+                    </li>
+                    <li>
+                        <div class="commonTitle">a</div>
+                    </li>
+                    <li>
+                        <div class="commonTitle">z</div>
+                    </li>
+                </ul>
+                <ul class="homeIcon">
+                    <li class="active"></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div></li>
+            <li><div class="course">Course</div></li>
+            <li><div class="works">
+                <header class="works1">
+                    <h2 class="commonTitle">
+                        <p>EINBLICK</p>
+                        <p>ERKENNTNIS</p>
+                        <p>ERGEBNIS</p>
+                    </h2>
+                </header>
+                <div class="work2">
+                    <div class="item">
+                        <img src="../img/t1.jpg" alt="">
+                        <div class="mask">
+                            <span>在我的后花园</span>
+                            <div class="icon"></div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="../img/t1.jpg" alt="">
+                        <div class="mask">
+                            <span>在我的后花园</span>
+                            <div class="icon"></div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="../img/t1.jpg" alt="">
+                        <div class="mask">
+                            <span>在我的后花园</span>
+                            <div class="icon"></div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="../img/t1.jpg" alt="">
+                        <div class="mask">
+                            <span>在我的后花园</span>
+                            <div class="icon"></div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="work3"></div>
+            </div></li>
+            <li><div class="about">
+                <header class="about1">
+                    <h2 class="commonTitle">
+                        <span>DIE</span><br>
+                        <span>SPEZIELLE</span><br>
+                        <span>VIELFALT</span>
+                    </h2>
+                </header>
+                <div class="about2">
+                    制作方法 ： 将油梨、香蕉放在碗内捣碎，然后加入酸奶搅拌成糊状即可。
+                    使用方法： 将面部洗净后曲适量面膜敷于脸上，若想效果更佳，则在按摩之后，将纱布或面膜纸沾取适量面膜敷在脸上，
+                    静敷10分钟后洗净即可，建议每周使用一次。
+                    功效： 保湿滋润，维持肌肤的水油平衡。
+                </div>
+            </div></li>
+            <li><div class="team">Team</div></li>
+        </ul>
+    </section>
+</div>
+</body>
+<script>
+    window.onload=function (){
+        // 获取元素
+        var arrow=document.querySelector('#header .arrow')
+        var upNodes=document.querySelectorAll('#header .header-bar .nav ul li .up')
+        var liNodes=document.querySelectorAll('#header .header-bar .nav ul li')
+        var content=document.getElementById('content')
+        var contentLi=document.querySelectorAll('#content .list li')
+        var contentList=document.querySelector('#content .list')
+        var now=0;
+        var timer=null
+
+        var header=document.getElementById('header')
+        function headerBind(){
+            upNodes[0].style.width='100%';
+
+            arrow.style.left=liNodes[0].getBoundingClientRect().left+
+                liNodes[0].offsetWidth/2-arrow.offsetWidth/2+'px';
+
+            for(var i=0;i<liNodes.length;i++){
+                // 给所有的li添加index属性
+                liNodes[i].index=i;
+                liNodes[i].onclick=function (){
+                    for(var j=0;j<liNodes.length;j++){
+                        upNodes[j].style.width='0'
+                    }
+                    upNodes[this.index].style.width='100%'
+                    arrow.style.left=liNodes[this.index].getBoundingClientRect().left+
+                        liNodes[this.index].offsetWidth/2-arrow.offsetWidth/2+'px';
+                    // contentList.style.top=-(this.index)*(document.documentElement.clientHeight-header.offsetHeight)+'px'
+                    move(this.index)
+                }
+            }
+        }
+        headerBind()
+        function contentBind(){
+            content.style.height=document.documentElement.clientHeight-header.offsetHeight+'px';
+            for(var i=0;i<contentLi.length;i++){
+                contentLi[i].style.height=document.documentElement.clientHeight-header.offsetHeight+'px';
+
+            }
+        }
+        contentBind()
+
+        // document.onmousewheel=function (event){
+        //     // 单次延迟器，调用后就不会再调用，所有先清除，在调用
+        //     clearTimeout(timer)
+        //     timer=setTimeout(function (){
+        //         fun(event)
+        //     },200)
+        // };
+        document.addEventListener('mousewheel',function (event){
+            clearTimeout(timer)
+            timer=setTimeout(function (){
+                fun(event)
+            },200)
+        })
+        // if(document.addEventListener){
+            document.addEventListener('DOMMouseScroll',function (event){
+                clearTimeout(timer)
+                timer=setTimeout(function (){
+                    fun(event)
+                },200)
+            })
+        // }
+        function fun(event){
+            event=event||window.event
+            var flag='';
+            if(event.wheelDelta){
+                if(event.wheelDelta>0){
+                    flag='up'
+                }else{
+                    flag='down'
+                }
+            }else if(event.detail){
+                if(event.detail<0){
+                    flag='up'
+                }else{
+                    flag='down'
+                }
+            }
+            switch (flag){
+                case "up":
+                    if(now>0){
+                        now--
+                    }
+                    move(now)
+                    break
+                case "down":
+                    if(now<liNodes.length-1){
+                        now++
+                    }
+                    move(now)
+                    break
+            }
+            event.preventDefault && event.preventDefault();
+        }
+
+        function move(now){
+            for(var i=0;i<upNodes.length;i++){
+                upNodes[i].style.width=''
+            }
+            upNodes[now].style.width='100%'
+            arrow.style.left=liNodes[now].getBoundingClientRect().left+
+                liNodes[now].offsetWidth/2-arrow.offsetWidth/2+'px'
+            contentList.style.top=-now*(document.documentElement.clientHeight-header.offsetHeight)+'px'
+
+        }
+        move(0)
+    }
+
+
+</script>
+</html>

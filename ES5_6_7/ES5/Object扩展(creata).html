@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        Object.creat()方法
+            第一个参数: 指定创建的对象的原型对象
+            第二个参数: 可选参数,创建的对象的属性
+                 每一个属性的值都必须为一个对象
+                    value               值
+                    writable            标识当前属性是否可以被修改,默认为false
+                    configurable        标识当前属性是否可以被删除,默认为false
+                    enumerable          标识当前属性是否可以for...in 枚举,默认为false
+
+     -->
+    <script  type="text/javascript">
+        var obj={
+            name:'kebi',
+            showName:function (){
+                console.log(this.name)
+            }
+        }
+
+        var obj2=Object.create(obj,{
+            sex:{
+                value:'男',
+                enumerable:true
+            },
+            age:{
+                value:19,
+                enumerable:true
+            },
+            showAge:{
+                value: function (){
+                    console.log(this.age)
+                },
+                enumerable:true
+            }
+        })
+
+        //for in 枚举对象的时候除了能够枚举自身的属性外,还可以枚举原型的属性
+        //所以最好是配合hasOwnProperty使用
+        for (var i in obj2){
+            //判断i是否是对象obj2自身上的属性(不包括原型对象)
+            if(obj2.hasOwnProperty(i)){
+                console.log(i)
+            }
+        }
+
+
+
+
+
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 720px;
+            margin: 100px auto;
+            min-height: 200px;
+            background-color: #ccc;
+        }
+
+        li {
+            width: 120px;
+            height: 80px;
+            float: left;
+            text-align: center;
+            line-height: 80px;
+            font-size: 20px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+        }
+
+        .zhengmain, .fanmain {
+            position: absolute;
+            background-color: brown;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .fanmain {
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body>
+<ul class="container">
+    <li>
+        <div class="zhengmain">1</div>
+        <div class="fanmain">一</div>
+    </li>
+    <li>
+        <div class="zhengmain">1</div>
+        <div class="fanmain">一</div>
+    </li>
+    <li>
+        <div class="zhengmain">1</div>
+        <div class="fanmain">一</div>
+    </li>
+    <li>
+        <div class="zhengmain">1</div>
+        <div class="fanmain">一</div>
+    </li>
+    <li>
+        <div class="zhengmain">1</div>
+        <div class="fanmain">一</div>
+    </li>
+    <li>
+        <div class="zhengmain">1</div>
+        <div class="fanmain">一</div>
+    </li>
+    <li>
+        <div class="zhengmain">1</div>
+        <div class="fanmain">一</div>
+    </li>
+    <li>
+        <div class="zhengmain">1</div>
+        <div class="fanmain">一</div>
+    </li>
+    <li>
+        <div class="zhengmain">1</div>
+        <div class="fanmain">一</div>
+    </li>
+    <li>
+        <div class="zhengmain">1</div>
+        <div class="fanmain">一</div>
+    </li>
+    <li>
+        <div class="zhengmain">1</div>
+        <div class="fanmain">一</div>
+    </li>
+    <li>
+        <div class="zhengmain">1</div>
+        <div class="fanmain">一</div>
+    </li>
+    <li>
+        <div class="zhengmain">1</div>
+        <div class="fanmain">一</div>
+    </li>
+    <li>
+        <div class="zhengmain">1</div>
+        <div class="fanmain">一</div>
+    </li>
+    <li>
+        <div class="zhengmain">1</div>
+        <div class="fanmain">一</div>
+    </li>
+    <li>
+        <div class="zhengmain">1</div>
+        <div class="fanmain">一</div>
+    </li>
+    <li>
+        <div class="zhengmain">1</div>
+        <div class="fanmain">一</div>
+    </li>
+    <li>
+        <div class="zhengmain">1</div>
+        <div class="fanmain">一</div>
+    </li>
+    <li>
+        <div class="zhengmain">1</div>
+        <div class="fanmain">一</div>
+    </li>
+    <li>
+        <div class="zhengmain">1</div>
+        <div class="fanmain">一</div>
+    </li>
+    <li>
+        <div class="zhengmain">1</div>
+        <div class="fanmain">一</div>
+    </li>
+    <li>
+        <div class="zhengmain">1</div>
+        <div class="fanmain">一</div>
+    </li>
+    <li id="b">
+        <div class="zhengmain">1</div>
+        <div class="fanmain">一</div>
+    </li>
+    <li id="a">
+        <span>换一批</span>
+    </li>
+
+</ul>
+</body>
+<script>
+    var control = document.querySelector('span');
+    var lis = document.querySelectorAll('li');
+    var b = document.querySelector('#b');
+    var container = document.querySelector('.container');
+    var rowLen = Math.floor(container.offsetWidth / lis[0].offsetWidth);
+    var liDeg = 0;
+    var isMove = false;
+    control.onclick = function () {
+        if (isMove) return;
+        isMove = true;
+        liDeg += 180;
+        lis.forEach(function (li, index) {
+            if (li.id == 'a') return;
+            li.style.transform = 'rotateY(' + liDeg + 'deg)';
+
+            var x = Math.floor(index / rowLen);
+            var y = index % rowLen;
+            var i = x + y;
+            li.style.transition = '0.5s ' + (i * 40) + 'ms'
+
+        });
+
+        b.ontransitionend = function () {
+            isMove = false;
+            console.log(1);
+        }
+    };
+    console.log(b);
+</script>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            background-color: #222;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        #container {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translateX(-50%) translateY(-50%);
+        }
+
+        li {
+            float: left;
+            margin-right: 3px;
+            animation: wenzi 1.3s infinite;
+        }
+
+        @keyframes wenzi {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(10px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+<ul id="container">
+    <li>L</li>
+    <li>o</li>
+    <li>a</li>
+    <li>d</li>
+    <li>i</li>
+    <li>n</li>
+    <li>g</li>
+    <li>.</li>
+    <li>.</li>
+    <li>.</li>
+</ul>
+</body>
+<script>
+    var lis = document.querySelectorAll('li');
+    lis.forEach(function (li, index) {
+        li.style.color = 'rgb(' + rand(150, 255) + ',' + rand(150, 255) + ',' + rand(150, 255) + ')';
+
+        li.style.animationDelay = (index * 40) + 'ms';
+    });
+
+    function rand(m, n) {
+        return Math.ceil(Math.random() * (n - m + 1)) + m - 1;
+    }
+</script>
+</html>

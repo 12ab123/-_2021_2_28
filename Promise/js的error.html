@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function doThing() {
+        const time=Date.now()
+        if(time%2===1){
+            console.log('当前时间为奇数,可以正常工作.....');
+        }else{
+            //抛出错误
+            throw new Error('当前时间为偶数,无法正常工作...')
+        }
+    }
+
+    try {
+        doThing()
+    }catch (e) {
+        //接收错误
+        alert(e.message)
+    }
+
+    console.log(111);
+</script>
+</body>
+</html>

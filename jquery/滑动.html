@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery-1.10.1.js"></script>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+<button id="btn1">慢慢收缩</button>
+<button id="btn2">慢慢展开</button>
+<button id="btn3">收缩/展开切换</button>
+<div id="box1"></div>
+<p>vnsosdosadndo</p>
+
+<script>
+    $('#btn1').click(function (){
+        $('#box1').slideUp(200)
+    })
+
+    $('#btn2').click(function (){
+        $('#box1').slideDown(200);
+    })
+
+    $('#btn3').click(function (){
+        $('#box1').slideToggle(200)
+    })
+</script>
+</body>
+</html>

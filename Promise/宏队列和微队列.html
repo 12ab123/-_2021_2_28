@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+        在执行完宏任务前,必须先将微任务执行完
+
+     */
+
+    setTimeout(()=>{
+        console.log(1);
+        setTimeout(()=>{
+            console.log(5);
+        })
+    })
+
+    setTimeout(()=>{
+        console.log(2);
+        Promise.resolve(6).then(value => console.log(value))
+    })
+
+    Promise.resolve(3).then(value => console.log(value))
+
+    Promise.resolve(4).then(value => console.log(value))
+</script>
+</body>
+</html>

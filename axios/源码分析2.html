@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>axios实现发送请求</title>
+</head>
+<body>
+
+<script>
+    function Axios(config) {
+        this.config = config
+    }
+
+    Axios.prototype.request = function (config) {
+        //创建一个promise对象
+        let promise = Promise.resolve(config)
+        //申明一个数组
+        let chains = [dispatchRequest, undefined]     //第二个参数undefined的作用是为了占位
+        //调用then方法指定回调
+        let result = promise.then(chains[0], chains[1])
+        //返回结果
+        return result
+    }
+
+    function dispatchRequest(config) {
+        //调用适配器去发送请求
+        return xhrAdapter(config).then(response=>{
+            //响应的结果进行转换处理
+            return response
+        },error=>{
+            throw error
+        })
+    }
+
+    //适配器
+    function xhrAdapter(config) {
+        return new Promise((resolve, reject) => {
+            let xhr=new XMLHttpRequest()
+            xhr.open(config.method,config.url)
+            xhr.send()
+            xhr.onreadystatechange=function () {
+                if(xhr.readyState===4){
+                    if(xhr.status>=200&&xhr.status<300){
+                        resolve({
+                            config:config,                                  //传入的配置对象
+                            data:xhr.response,                              //响应体
+                            headers:xhr.getAllResponseHeaders(),            //响应头
+                            request:xhr,                                    //请求对象
+                            status:xhr.status,                              //响应状态码
+                            statusText:xhr.statusText                       //响应状态字符串
+                        })
+                    }else {
+                        reject(new Error('请求失败,失败的状态码为:'+xhr.status))
+                    }
+                }
+            }
+        })
+    }
+
+    let axios = Axios.prototype.request.bind(null)
+
+
+    axios({
+        method: 'get',
+        url: 'http://localhost:3000/posts'
+    }).then(response => {
+        console.log(response);
+    })
+</script>
+</body>
+</html>

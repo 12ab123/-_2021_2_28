@@ -1,0 +1,32 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+
+// 定义混合mixin
+
+@zero:0;
+.juzhong(@w:500px,@h:500px,@bg){
+  position: absolute;
+  top: @zero;
+  left: @zero;
+  right: @zero;
+  bottom: @zero;
+  margin: auto;
+  width: @w;
+  height: @h;
+  background: @bg;
+}
+
+#warp{
+  .juzhong(@bg:yellow);
+  .box1{
+    .juzhong(400px,400px,@bg:red);
+  }
+  .box2{
+    .juzhong(@w:300px,@h:300px,@bg:#ccc);
+  }
+  .box3{
+    .juzhong(@w:200px,@h:200px,@bg:#baf);
+  }
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="example1"></div>
+    <div id="example2"></div>
+    <!-- 引入react核心库 -->
+    <script src="js/react.development.js" type="text/javascript"></script>
+    <!-- 引入react.dom,用于操作dom -->
+    <script src="js/react-dom.development.js" type="text/javascript"></script>
+    <!-- 引入babel,用于解析jsx为js -->
+    <script src="js/babel.min.js" type="text/javascript"></script>
+    <!-- 引入prop-types,用于限制传递标签属性的类型和必要性 -->
+    <script src="js/prop-types.js" type="text/javascript"></script>
+
+    <script  type="text/babel">
+        class Person extends React.Component{
+            static propTypes={
+            /*
+                isRequired: 必须输入内容
+            */
+            name:PropTypes.string.isRequired,
+            age:PropTypes.number,
+            sex:PropTypes.string,
+        }
+            static defaultProps={
+            age:18,
+            sex:'不男不女'
+        }
+            render(){
+                return (<ul>
+                    <li>姓名:{this.props.name}</li>
+                    <li>性别:{this.props.sex}</li>
+                    <li>年龄:{this.props.age}</li>
+                </ul>)
+                }
+            }
+
+        // Person.propTypes={
+        //     /*
+        //         isRequired: 必须输入内容
+        //     */
+        //     name:PropTypes.string.isRequired,
+        //     age:PropTypes.number,
+        //     sex:PropTypes.string,
+        // }
+        // //默认属性
+        // Person.defaultProps={
+        //     age:18,
+        //     sex:'不男不女'
+        // }
+        ReactDOM.render(<Person name="kebi" age={18} sex="男"/>,document.getElementById('example1'))
+        ReactDOM.render(<Person name='zhaungsanm'/>,document.getElementById('example2'))
+
+    </script>
+
+</body>
+</html>

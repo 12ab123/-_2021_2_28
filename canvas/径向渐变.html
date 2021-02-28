@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        canvas {
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+<canvas></canvas>
+</body>
+<script>
+    var canvas = document.querySelector('canvas');
+    canvas.width = 600;
+    canvas.height = 500;
+    var ctx = canvas.getContext('2d');
+
+    //径向渐变
+    //前三个参数为第一个圆的位置和半径
+    //后三个参数为第二个圆的位置和半径
+    var gradient = ctx.createRadialGradient(300, 250, 20, 300, 250, 100);
+
+    gradient.addColorStop(0, 'red');
+    gradient.addColorStop(0.5, 'yellow');
+    gradient.addColorStop(1, 'black');
+    //填充颜色
+    ctx.fillStyle = gradient;
+
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+</script>
+</html>

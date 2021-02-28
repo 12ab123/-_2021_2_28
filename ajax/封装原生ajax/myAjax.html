@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>封装原生的ajax</title>
+</head>
+<body>
+<button id="btn">点我使用自己封装的ajax</button>
+<script>
+    let btn = document.querySelector('#btn')
+    btn.onclick = function () {
+        //第4次请求需要第3次请求的结果
+        //第3次请求需要第2次请求的结果
+        //第2次请求需要第1次请求的结果
+        //由层层回调函数嵌套称之为回调地狱
+        sendAjax({
+            url: 'http://localhost:3000/get_ajax',
+            method: 'post',
+            data: {name: 'laijiandong', age: 19},
+            success: function (result) {
+                sendAjax({
+                    url: 'http://localhost:3000/get_ajax',
+                    method: 'post',
+                    data: {name: 'laijiandong', age: result},
+                    success: function (result) {
+                        sendAjax({
+                            url: 'http://localhost:3000/get_ajax',
+                            method: 'post',
+                            data: {name: 'laijiandong', age: result},
+                            success: function (result) {
+                                sendAjax({
+                                    url: 'http://localhost:3000/get_ajax',
+                                    method: 'post',
+                                    data: {name: 'laijiandong', age: result},
+                                    success: function (result) {
+                                        console.log(result);
+                                    },
+                                    error: function (err) {
+                                        console.log(err);
+                                    }
+                                })
+                            },
+                            error: function (err) {
+                                console.log(err);
+                            }
+                        })
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                })
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+    }
+
+
+    function sendAjax(option) {
+        //获取配置对象的属性
+        let {url, method, data, success, error} = option
+        method = method ? method : 'get'
+
+
+        let xhr = new XMLHttpRequest()
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState !== 4) {
+                return
+            }
+            if (xhr.readyState === 4 && (xhr.status >= 200 && xhr.status <= 299)) {
+                //判断是否传入成功的回调
+                if (success) {
+                    success(xhr.response)
+                }
+            } else {
+                if (error) {
+                    error('请求出错')
+                }
+            }
+        }
+
+        //整理参数
+        let str = ''
+        for (let key in data) {
+            str += `${key}=${data[key]}&`
+        }
+
+
+        //根据请求方法决定如何携带参数
+        if (method.toUpperCase() === 'GET') {
+            xhr.open(method, url + '?' + str)
+            xhr.send()
+        } else {
+            xhr.open(method, url)
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+            xhr.send(str)
+        }
+    }
+
+
+</script>
+</body>
+</html>

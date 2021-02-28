@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            如何产生闭包
+                1. 内部函数引用外部函数的局部变量
+                2. 函数嵌套
+                3. 使用内部函数
+
+
+            闭包到底是什么
+                1. 闭包是嵌套的内部函数(绝大部分人)
+                2. 包含被引用变量(函数)的对象
+                3. 所谓的闭包是一个引用关系,该引用关系存在于内部函数中,引用外部函数的变量对象
+        */
+
+
+        function fun(){
+            var a=10
+            function fun2(){
+                console.log(a)
+            }
+            return fun2
+        }
+        var fun2=fun()
+        setTimeout(function (){
+            fun2()
+        },10000)
+    </script>
+</body>
+</html>

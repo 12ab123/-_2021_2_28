@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+
+    <script>
+        var btn=document.querySelectorAll('button')
+
+        // for(var i=0;i<btn.length;i++){
+        //     btn[i].onclick=function (){
+        //         alert('第'+i+'个')
+        //     }
+        // }
+
+        //解决办法
+        for(var i=0;i<btn.length;i++){
+            (function (i){
+                 btn[i].onclick=function (){
+                    alert('第'+i+'个')
+                }
+            })(i)
+        }
+    </script>
+</body>
+</html>

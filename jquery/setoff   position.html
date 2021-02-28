@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery-1.10.1.js"></script>
+    <style>
+        #box{
+            width: 300px;
+            height: 100px;
+            background-color: red;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<div id="box1">
+    <div id="box2"></div>
+</div>
+<script>
+    console.log($('#div').offset().left)
+    console.log($('#div').offset().top)
+    $('#div').offset({
+        top:200,
+        left:100
+
+    })
+</script>
+</body>
+</html>

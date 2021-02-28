@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>该页面是测试取消上一次请求</h1>
+<button id="btn">获取验证码</button>
+
+<script>
+    let btn=document.querySelector('#btn')
+    let lastXhr
+    btn.onclick=function(){
+        if(lastXhr){
+            lastXhr.abort()
+        }
+        lastXhr=getAutoCode()
+
+
+        //xhr.abort()     //用于取消本次请求
+        /*
+        关于xhr.abort()
+            1. 如果来的及,半路取消,请求根本没有到服务器
+            2. 如果来不及(请求已经到达服务器),服务器给出响应,但是客户端将响应拒之门外
+            3. 也存在根本不起作用的情况,服务器的响应已经为客户端接收,此时xhr.abort()什么作用也不起
+         */
+    }
+
+    function getAutoCode() {
+        let xhr=new XMLHttpRequest()
+
+        xhr.onreadystatechange=function(){
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                //如果进入此判断,意味着: 请求成功了,数据已经回来了
+                console.log(xhr.response);
+            }
+        }
+        xhr.open('get','http://localhost:3000/get_code')
+
+        xhr.send()
+
+        return xhr
+    }
+
+</script>
+</body>
+</html>

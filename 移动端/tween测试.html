@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+             padding: 0;
+             margin: 0;
+        }
+        ul{
+             list-style: none;
+        }
+        #box{
+            width: 100px;
+            height: 100px;
+            background: rgb(230,231,212);
+            position: absolute;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<script src="音悦台/js/transformCSS.js"></script>
+<script src="tweenAnimation.js"></script>
+<script>
+    var box=document.getElementById('box');
+    tweenAnimation(box,'rotate',0,960,3000,10);
+    // tweenAnimation(box,'translateX',0,1000,500,10);
+    box.onclick=function () {
+        clearInterval(this.timer['rotate']);
+    }
+</script>
+</body>
+</html>

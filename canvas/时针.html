@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>时钟</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        #b {
+            background-color: #eee;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translateX(-50%) translateY(-50%);
+        }
+        #a{
+            background-color: #eee;
+        }
+    </style>
+</head>
+<body>
+<canvas id="b"></canvas>
+<canvas id="a"></canvas>
+</body>
+<script src="js/Clock.js"></script>
+<script>
+    new Clock('canvas');
+    new Clock('#a',{
+        width:100,
+        height:100
+    })
+</script>
+</html>
+
+
+
+
+
+
+
+

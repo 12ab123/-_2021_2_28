@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="chongtu.js"></script>
+    <script src="../jquery-1.10.1.js"></script>
+
+</head>
+<body>
+<!--问题：如果两个库都有$，就会存在冲突
+    解决：jquery可以释放掉$的使用权，让另一个库使用，此时jquery库只能使用jquery
+    jquery.noConflict()
+-->
+
+<script>
+    jQuery.noConflict()
+    // $()
+    $()
+    jQuery(function (){
+        console.log('我是jquery库')
+    })
+</script>
+</body>
+</html>

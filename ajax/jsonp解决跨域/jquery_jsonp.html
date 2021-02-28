@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="public/js/jquery-1.10.1.js"></script>
+<button id="btn">点我</button>
+
+<script>
+    $('#btn').click(function () {
+        //完整写法
+        $.ajax({
+            url:'http://localhost:3000/test',
+            method:'port',
+            dataType:'jsonp',         //该属性控制了上面的四步
+            data:{
+                name:'laijaindong',
+                age:18
+            },
+            success:function (result) {
+                console.log(result);
+            },
+            err:function (err) {
+                console.log(err);
+            }
+        })
+
+        //精简写法(不推荐)
+        // $.getJSON('http://localhost:3000/test?callback=?',{name:'laijaindong',age:18},function (data) {
+        //     console.log(data);
+        // })
+    })
+</script>
+</body>
+</html>

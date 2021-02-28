@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery-1.10.1.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        table{
+            border-collapse: collapse;
+            margin: 100px auto;
+        }
+        tr th,td{
+            border: 1px solid black;
+            width: 80px;
+            height: 30px;
+        }
+        #box{
+            margin: 100px auto;
+            width: 300px;
+            height: 200px;
+            border: 1px solid black;
+        }
+        button{
+            transform: translateX(130px);
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Salary</th>
+        <th></th>
+    </tr>
+
+    <tr>
+        <td>Bob</td>
+        <td>bob@qq.com</td>
+        <td>12</td>
+        <td><a href="javascript:;">Delete</a></td>
+    </tr>
+</table>
+
+<div id="box">
+    <div style="font-size: 30px;font-weight: bold">添加新员工</div>
+    name:
+    <input type="text" id="name"><br>
+    email:
+    <input type="text" id="email"><br>
+    salary:
+    <input type="text" id="salary"><br>
+    <button>Submit</button>
+</div>
+
+<script>
+    var $name=$('#name')
+    var $email=$('#email')
+    var $salary=$('#salary')
+    $('button').click(function (){
+        var name=$name.val()
+        var email=$email.val()
+        var salary=$salary.val()
+        $('<tr></tr>').append('<td>'+name+'</td>')
+        .append('<td>'+email+'</td>')
+        .append('<td>'+salary+'</td>')
+        .append('<td><a href="javascript:;">Delete</a></td>').appendTo($('table>tbody'))
+        $name.val('')
+        $email.val('')
+        $salary.val('')
+    })
+
+    $('table').click(function (event){
+        var cl=event.target
+        var name=cl.parentElement.parentElement.firstElementChild.innerHTML
+        console.log(cl)
+        if(cl.nodeName=='A'){
+            if(confirm('你确定要删除'+name+'的信息吗'))
+            cl.parentElement.parentElement.remove()
+        }
+    })
+</script>
+</body>
+</html>

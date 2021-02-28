@@ -1,0 +1,168 @@
+//重置样式，和reset.css差不多
+@import "normalize";
+
+*{
+  box-sizing: border-box;
+}
+
+//清除浮动
+.clearfix{
+  &:after{
+    content: '';
+    display: block;
+    clear: both;
+  }
+}
+
+//变量申明  1200   992    768
+
+//屏幕的阈值
+@screen-lg:1200px;
+@screen-md:992px;
+@screen-sm:768px;
+
+//container     容器的宽度
+@container-lg-width:1170px;
+@container-md-width:970px;
+@container-sm-width:750px;
+
+
+//列宽
+@grid-gutter-width:30px;
+
+
+//总列数
+@grid-columns:12;
+
+
+// 实现
+// 1.容器的实现
+.make-container() {
+  //container容器的实现
+  .container {
+    &:extend(.clearfix all);
+    .container-common-style();
+    //小屏幕时container的宽度
+    @media (min-width: @screen-sm ) {
+      width: @container-sm-width;
+    }
+    //中屏幕时container的宽度
+    @media (min-width: @screen-md ) {
+      width: @container-md-width;
+    }
+    //大屏幕时container的宽度
+    @media (min-width: @screen-lg ) {
+      width: @container-lg-width;
+    }
+  }
+
+  //  container-fluid容器的实现
+  .container-fluid() {
+    &:extend(.clearfix all);
+    .container-common-style();
+  }
+
+//  混合
+  .container-common-style(){
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: @grid-gutter-width/2;
+    padding-right: @grid-gutter-width/2;
+  }
+}
+.make-container();
+
+
+//2.行的实现
+.make-row(){
+  .row{
+      margin-left:-@grid-gutter-width/2 ;
+      margin-right:-@grid-gutter-width/2 ;
+  }
+}
+.make-row();
+
+
+//3.列的实现
+.make-grid-columns(){
+    .col(@index){
+        @selector: ~'.col-xs-@{index},.col-sm-@{index},.col-md-@{index},.col-lg-@{index}';
+        .col(@index+1,@selector);
+    }
+  .col(@index,@list) when (@index <= @grid-columns){
+    @selector:~'@{list},.col-xs-@{index},.col-sm-@{index},.col-md-@{index},.col-lg-@{index}';
+    .col(@index+1,@selector);
+  }
+  .col(@index,@list) when (@index > @grid-columns){
+    @{list}{
+      padding-right: @grid-gutter-width/2;
+      padding-left: @grid-gutter-width/2;
+      position: relative;
+      min-height: 1px;
+      float: left;
+    }
+  }
+  .col(1)
+}
+.make-grid-columns();
+
+
+// 公共样式
+
+
+
+
+
+//超小屏的宽度设置
+.make-columns-width(@type){
+  .col(@index)when (@index<=@grid-columns){
+    @selector:~'.col-@{type}-@{index}';
+    @{selector}{
+      @w: @index/@grid-columns*100;
+      width: ~'@{w}%';
+    }
+    .col(@index+1);
+  }
+  .col(1);
+}
+.make-columns-width(xs);
+
+//超小屏的偏移设置
+.make-columns-offset(@type){
+  .col(@index)when(@index<=@grid-columns){
+    @selector:~'.col-@{type}-offset-@{index}';
+    @{selector}{
+      margin-left: percentage(@index/@grid-columns);
+    }
+    .col(@index+1)
+  }
+  .col(1)
+}
+.make-columns-offset(xs);
+
+
+
+// 媒体查询阶段
+
+@media (min-width: @screen-sm) {
+    .make-columns-width(sm);
+    .make-columns-offset(sm);
+
+}
+
+@media (min-width: @screen-md) {
+  .make-columns-width(md);
+  .make-columns-offset(md);
+
+}
+
+@media (min-width: @screen-lg) {
+  .make-columns-width(lg);
+  .make-columns-offset(lg);
+
+}
+
+
+
+
+

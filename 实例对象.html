@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function Fn(){
+				this.test1=function (){
+					console.log('test1');
+				}
+			}
+			Fn.prototype.test2=function (){
+				console.log('test2');
+			}
+			var fn=new Fn();
+			
+		</script>
+	</body>
+</html>

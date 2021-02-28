@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        #box {
+            width: 100%;
+            height: 300px;
+            background-color: #909;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+    </style>
+</head>
+<body>
+<div id="box"></div>
+</body>
+<script>
+    document.documentElement.addEventListener('touchstart', function (e) {
+        e.preventDefault();
+    }, {
+        passive: false
+    });
+    var box = document.querySelector('#box');
+    box.hasGestureStart = false;
+    box.addEventListener('touchstart', function (e) {
+        //获取触点信息
+        var t = e.touches;
+        if (t.length >= 2) {
+            box.innerHTML = "模拟手势开始事件!!";
+            box.style.backgroundColor = 'red';
+            box.hasGestureStart = true;
+        }
+    });
+    box.addEventListener('touchmove', function (e) {
+        //获取触点信息
+        var t = e.touches;
+        if (t.length >= 2) {
+            box.innerHTML = "模拟手势移动事件!!" + Math.random();
+            box.style.backgroundColor = 'yellow';
+        }
+    });
+    box.addEventListener('touchend', function (e) {
+        var t = e.touches;
+        //必须要有两个手指,所以是执行touchstart事件后,才执行它
+        if (t.length < 2 && this.hasGestureStart) {
+            box.innerHTML = "模拟手势离开事件!!";
+            box.style.backgroundColor = 'blue';
+            box.hasGestureStart=false;
+        }
+    })
+</script>
+</html>

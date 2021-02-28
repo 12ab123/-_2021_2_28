@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        iterator遍历器的工作原理:
+            创建一个指针对象(遍历器对象),指向数据结构的起始位置
+            第一次调用next方法,指针自动指向数据结构的第一位成员
+            接下来不断调用next方法,指针会一直往后移动,直到指向最后一位成员
+            每调用一次next方法返回的是一个包含value和done的对象,{value:当前成员的值,done:布尔值}
+            value表示当前成员的值,done对应的布尔值表示当前的数据的结构是否遍历结束
+            当遍历结束时value返回的undefined,done返回的是false
+
+     -->
+    <script  type="text/javascript">
+        function iteratorUtil(target){
+            let index=0
+            return {
+                next:function (){
+                    return index<target.length?{value:target[index++],done:false}:{value:target[index++],done:true}
+                }
+            }
+        }
+    </script>
+</body>
+</html>

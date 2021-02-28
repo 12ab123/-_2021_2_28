@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button onclick="getProducts1()">获取商品列表1</button>
+<button onclick="getProducts2()">获取商品列表2</button>
+<button onclick="cancelReq()">取消请求</button>
+<script src="node_modules/axios/dist/axios.js"></script>
+<script>
+    axios.defaults.baseURL='http://localhost:4000'
+    let cancel
+    function getProducts1() {
+        //如果有未完成的请求,取消掉这个请求,执行当前请求
+        if(cancel){
+            cancel('强制取消')
+        }
+        axios('getProducts1',{
+            cancelToken:new axios.CancelToken((c)=>{     //在CancelToken同步执行,并传入用于取消请求的函数
+                cancel=c
+            })
+        }).then(
+            response=>{
+                cancel=null
+                console.log('111 onResolved',response.data)
+            },error=>{
+
+                //如果出错的类型为cancel,则为取消出错,否则,为正常出错
+                //作用: 分辨出错的类型
+                if(axios.isCancel(error)){
+                    console.log('111 取消出错',error.message);
+                }else{
+                    cancel=null
+                    console.log('111 onRejected',error.message);
+                }
+            }
+        )
+    }
+
+    function getProducts2() {
+        if(cancel){
+            cancel('强制取消')
+        }
+        axios('getProducts2',{
+            cancelToken:new axios.CancelToken((c)=>{     //在CancelToken同步执行,并传入用于取消请求的函数
+                cancel=c
+            })
+        }).then(
+            response=>{
+                cancel=null
+                console.log('222 onResolved',response.data)
+            },error=>{
+                /*
+                不能在此处写cancel=null,由于then中的回调为异步的,而axios中的配置对象中cancelToken为同步回调,所以
+                会导致取消上一个请求时,先取消上一个请求,再执行cancelToken,给当前请求设置强制取消,然后执行then中的
+                失败回调,将cancel设置为null,下一次请求就不会强制取消当前请求
+                 */
+                if(axios.isCancel(error)){
+                    console.log('222 取消出错',error.message);
+                }else{
+                    cancel=null
+                    console.log('222 onRejected',error.message);
+                }
+            }
+        )
+    }
+
+    function cancelReq() {
+        if(cancel){
+            cancel('强制取消')         //取消成功后返回的信息,状态为rejected
+        }
+    }
+</script>
+</body>
+</html>

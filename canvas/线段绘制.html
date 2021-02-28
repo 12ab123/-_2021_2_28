@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas{
+            border: 1px solid #000000;
+        }
+    </style>
+</head>
+<body>
+<canvas width="600px" height="500px"></canvas>
+</body>
+<script>
+    var canvas=document.querySelector('canvas');
+    var ctx=canvas.getContext('2d');
+
+
+    //开始绘制
+    ctx.beginPath();
+    //设置画笔的宽度
+    ctx.lineWidth=5;
+    //设置画笔的颜色
+    ctx.strokeStyle='pink';
+    //将画笔移动到起始位置
+    ctx.moveTo(100,50);
+    //绘制线段      将画笔从当前位置绘制到下一个坐标点
+    ctx.lineTo(300,150);
+    ctx.lineTo(500,50);
+    ctx.lineTo(100,50);
+    //描边(绘制路径)
+    ctx.stroke();
+
+    //绘制直角三角形
+    ctx.beginPath();
+    ctx.moveTo(100,300);
+    ctx.lineTo(400,400);
+    ctx.lineTo(100,400);
+    ctx.lineJoin="miter";
+    ctx.closePath();
+    ctx.stroke();
+
+
+    ctx.beginPath();
+    ctx.strokeStyle='red';
+    ctx.moveTo(200,200);
+    ctx.lineTo(300,300);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.strokeStyle='yellow';
+    ctx.moveTo(300,300);
+    ctx.lineTo(200,300);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.strokeStyle='blue';
+    ctx.moveTo(200,300);
+    ctx.lineTo(200,200);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.lineWidth=10;
+    ctx.lineCap="square";
+    ctx.moveTo(400,200);
+    ctx.lineTo(500,200);
+    ctx.stroke();
+</script>
+</html>

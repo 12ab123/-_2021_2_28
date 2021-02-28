@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../jquery-1.10.1.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        ul{
+            overflow: hidden;
+        }
+        ul li{
+            list-style: none;
+            width: 100px;
+            height: 50px;
+            float: left;
+            line-height: 50px;
+            text-align: center;
+        }
+        ul li:nth-child(1){
+            background-color: yellow;
+        }
+        ul li:nth-child(2){
+            background-color: red;
+        }
+        ul li:nth-child(3){
+            background-color: blue;
+        }
+        div:nth-child(3){
+            width: 500px;
+            height: 200px;
+            background-color: red;
+        }
+        div:nth-child(2){
+            width: 500px;
+            height: 200px;
+            background-color: yellow;
+            display: none;
+        }
+        div:nth-child(4){
+            width: 500px;
+            height: 200px;
+            background-color:blue;
+            display: none;
+
+        }
+
+    </style>
+</head>
+<body>
+    <ul>
+        <li>10元套餐</li>
+        <li>30元套餐</li>
+        <li>50元包月</li>
+    </ul>
+
+    <div>10元</div>
+    <div>30元</div>
+    <div>50元</div>
+    <script type="text/javascript">
+        var $btns=$('ul li')
+        var $divs=$('div')
+        var index=1;
+        $btns.click(function (){
+            var clickindex=$(this).index()
+            // 去重点击判断
+            if(index==clickindex){
+                alert('您重复点击了')
+                return
+            }
+            $divs[index].style.display='none';
+            $divs[clickindex].style.display='block';
+            index=clickindex;
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        header {
+            height: 10vh;
+            background: rgb(0, 0, 0);
+            font-family: "宋体";
+            font-size: 20px;
+            text-align: center;
+            line-height: 10vh;
+            color: white;
+            position: relative;
+            z-index: 10;
+        }
+
+        main {
+            height: 90vh;
+        }
+
+        #content {
+            position: relative;
+            overflow: hidden;
+        }
+
+        li {
+            width: 46vw;
+            height: 46vw;
+            float: left;
+            margin: 2vw;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        li > img {
+            width: 100%;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<header>三国男将</header>
+<main>
+    <div id="content">
+        <ul id="imgList">
+
+        </ul>
+        <div class="pull-up-update"></div>
+    </div>
+</main>
+<script src="js/transformCSS.js"></script>
+<script src="js/tweenAnimation.js"></script>
+<script src="js/touchScroll.js"></script>
+<script>
+    // 变量申明
+    var imgList = document.getElementById('imgList');
+    var main = document.querySelector('main');
+    var content = document.getElementById('content');
+
+    //每次呈现图片的数量
+    var imgNum = 16;
+    var page = 1;
+
+    // 阻止默认行为
+    document.documentElement.addEventListener('touchstart', function (e) {
+        e.preventDefault();
+    }, {
+        passive: false
+    });
+
+
+
+    //    初始化数据仓库
+    var imgData = [];
+    //方法1
+    // var j = 1;
+    // for (var i = 0; i < 100; i++) {
+    //     if (j > 6) {
+    //         j = 1;
+    //     }
+    //     imgData[i] = '../img/' + j + '.jpg';
+    //     j += 1;
+    // }
+
+    //方法2
+    for (var i = 0; i < 100; i++) {
+        // imgData[i] = './img/' + (i % 6 + 1) + '.jpg';
+        imgData[i] = 'https://picsum.photos/id/' + i + '/300/300'
+    }
+
+
+    //    申明函数创建li
+    function chuangjianLi() {
+        // 1       0       16
+        // 2      16       32
+        // 3      32       48
+        // N   (N-1)*16  N*16
+
+        var start = (page - 1) * imgNum;
+        var end = page * imgNum;
+        for (var i = start; i < end; i++) {
+            var li = document.createElement('li');
+            //标识li是一个未加载的情况
+            li.dataset.isLoaded = 0;
+            var img = document.createElement('img');
+            // img.src = imgData[i];
+            // 创建一个自定义属性
+            li.dataset.src = imgData[i];
+            li.appendChild(img);
+            imgList.appendChild(li);
+        }
+        // 页码自增
+        page++;
+
+        //    检测图片状态
+        //    遍历图片
+        lazyLoad();
+    }
+
+    chuangjianLi();
+
+    // main.addEventListener('touchmove', function (e) {
+    //     lazyLoad();
+    // });
+
+    //判断图片是否该加载
+    function lazyLoad() {
+        //    检测每一个li是否进入可视区域
+        var lis = document.querySelectorAll('#imgList li');
+        lis.forEach(function (li) {
+            // 获取元素相对于父级元素的偏移量
+            var oT = li.offsetTop;
+            //    获取容器元素的高度
+            var h = main.offsetHeight;
+            //获取偏移量
+            var translateY = -transformCSS(content, 'translateY');
+
+            if (oT <= h + translateY && li.dataset.isLoaded==0) {
+                var img = li.querySelector('img');
+                var src = li.dataset.src;
+                img.src = src;
+                li.dataset.isLoaded = 1;
+            }
+        })
+    }
+
+    //    触摸滑动效果
+    new TouchScroll('main', '#content',options={
+        bg:'rgba(21,219,0,0.8)',
+        move:function () {
+            lazyLoad();
+        }
+    });
+</script>
+</body>
+
+</html>

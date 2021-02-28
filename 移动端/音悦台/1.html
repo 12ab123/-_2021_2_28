@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #box{
+            width: 100px;
+            height: 100px;
+            background: #000;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+</body>
+<script src="js/transformCSS.js"></script>
+<script>
+    var box=document.getElementById('box');
+    transformCSS(box,'translateX',200);
+    console.log(transformCSS(box, 'translateX'));
+</script>
+</html>

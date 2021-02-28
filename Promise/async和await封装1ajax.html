@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<button>点击获取段子</button>
+<script>
+    function sendAjax(url) {
+        return new Promise((resolve, reject) => {
+            let xhr=new XMLHttpRequest()
+            xhr.open('get',url)
+            xhr.send()
+            xhr.onreadystatechange=function () {
+                if(xhr.readyState===4){
+                    if(xhr.status>=200&&xhr.status<=300){
+                        resolve(xhr.response)
+                    }else {
+                        reject(xhr.status)
+                    }
+                }
+            }
+        })
+    }
+    let btn=document.querySelector('button')
+    btn.onclick=async function () {
+        let duanzi=await sendAjax('https://api.apiopen.top/getJoke')
+        console.log(duanzi);
+    }
+</script>
+
+</body>
+
+</html>

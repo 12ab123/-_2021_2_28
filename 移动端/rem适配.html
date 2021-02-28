@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 100px">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <title>Title</title>
+    <style>
+        #box {
+            width: 1.59rem;
+            height: 0.89rem;
+            margin-left: 0.21rem;
+            margin-top: 2rem;
+            background: #886;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+</body>
+<script>
+    // // 获取布局视口的宽度
+    // var width = document.documentElement.clientWidth;
+    //
+    // //    计算新的font-size
+    // var x = width * 100 / 375;
+    //
+    // //    设置新的font-size
+    // document.documentElement.style.fontSize = x + 'px';
+    document.documentElement.style.fontSize = document.documentElement.clientWidth * 100 / 375 + 'px';
+
+    //    当视口发生改变时
+    window.onresize = function () {
+        document.documentElement.style.fontSize = document.documentElement.clientWidth * 100 / 375 + 'px';
+
+    }
+</script>
+</html>

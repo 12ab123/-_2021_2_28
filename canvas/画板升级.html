@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <title>画板</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        canvas {
+            display: block;
+            /*border: 1px solid #ccc;*/
+        }
+
+        #container {
+            box-sizing: border-box;
+            position: relative;
+            width: 800px;
+            height: 500px;
+            border: 1px solid #000000;
+            margin: 100px auto;
+        }
+
+        .color-setting {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 80px;
+            height: 100px;
+            /*background-color: black;*/
+        }
+
+        .color-setting p {
+            width: 30px;
+            height: 20px;
+            margin-left: -1px;
+            margin-bottom: 10px;
+            transition: 0.5s width;
+        }
+
+        .yellowgreen {
+            background-color: yellowgreen;
+        }
+
+        .pink {
+            background-color: pink;
+        }
+
+        .cyan {
+            background-color: cyan;
+        }
+
+        .clear {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            text-align: center;
+            line-height: 50px;
+            font-size: 17px;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <canvas width="800px" height="500px"></canvas>
+
+    <div class="color-setting">
+        <p class="yellowgreen"></p>
+        <p class="pink"></p>
+        <p class="cyan"></p>
+    </div>
+
+    <div class="clear">擦除</div>
+</div>
+</body>
+<script>
+    var colorSetting = document.querySelector('.color-setting');
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
+    var items = document.querySelectorAll('.color-setting p');
+    var clear = document.querySelector('.clear');
+    //标识变量
+    var isDown = false;
+
+    canvas.onmousedown = function (e) {
+        ctx.beginPath();
+        ctx.moveTo(e.offsetX, e.offsetY);
+        isDown = true;
+    };
+
+    canvas.onmousemove = function (e) {
+        if (isDown) {
+            ctx.lineTo(e.offsetX, e.offsetY);
+            ctx.stroke();
+        }
+
+    };
+
+    canvas.onmouseup = function () {
+        isDown = false;
+    };
+
+
+    colorSetting.onclick = function (e) {
+        if (e.target.nodeName == 'P') {
+            // ctx.strokeStyle=e.target.className;
+            ctx.strokeStyle = getComputedStyle(e.target).backgroundColor;
+            e.target.style.width = '50px';
+            items.forEach(function (item) {
+                item.style.width = '30px';
+            });
+            e.target.style.width = '50px';
+
+        }
+    }
+
+    clear.onclick = function () {
+        console.log(1);
+        ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight)
+    }
+    //    还有一种方法就是将onmousemove和onmouseup事件放入到onmousedown中,但是每次要移出onmousemove和onmouseup事件
+    //    不然内存中会储存大量的onmousemove和onmouseup事件,占据内存
+</script>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <title>Title</title>
+</head>
+<body>
+<audio id="music" src="MP3/1.m4a" controls loop preload="auto" autoplay></audio>
+<hr>
+<button>加声音</button>
+<button>减声音</button>
+<button>静音</button>
+<button>3倍播放</button>
+<button>暂停</button>
+<button>播放</button>
+</body>
+<script>
+    var audio = document.querySelector('#music');
+    var btns = document.querySelectorAll('button');
+    audio.onloadedmetadata = function () {
+        console.log(audio.duration);
+        console.log(audio.paused);
+        console.log(audio.ended);
+    };
+    audio.ontimeupdate = function () {
+        // console.log(audio.currentTime);
+
+    };
+    audio.onvolumechange = function () {
+        console.log(Math.random());
+    };
+    btns[0].onclick = function () {
+        audio.volume += 0.1;
+    };
+    btns[1].onclick = function () {
+        audio.volume -= 0.1;
+    };
+    btns[2].onclick = function () {
+        audio.muted = !audio.muted;
+    };
+    btns[3].onclick = function () {
+        audio.playbackRate = 3;
+    };
+    btns[4].onclick = function () {
+        audio.pause();
+    };
+    btns[5].onclick = function () {
+        audio.play();
+    }
+</script>
+</html>

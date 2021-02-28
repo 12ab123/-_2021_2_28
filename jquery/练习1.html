@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../jquery-1.10.1.js"></script>
+    <script type="text/javascript">
+        // 参数为函数，当dom加载完成之后，执行此回调函数
+        $(function (){
+            // 参数为选择器字符串，查找所有匹配的标签，并将它们封装成jquery对象
+            $('#btn').click(function (){
+                // alert(this.innerHTML)
+                // 参数为dom对象，将dom对象封装为jquery对象
+                alert($(this).html())
+                $('<input type="text" name="msg2"/>').appendTo($('#box'))
+                $('<br/>').appendTo($('#box'))
+            })
+
+            // 遍历输出数组中所有元素值
+            var arr=[12,34,2,5,1]
+            // each 相当于原生中的forEach
+            $.each(arr,function (index,value){
+                console.log(index,value)
+            })
+
+            // 去掉两端空格
+            var str='      ans      ';
+             console.log(str.trim())       //  原生
+            console.log($.trim(str))      // jquery
+        })
+    </script>
+</head>
+<body>
+<div id="box" class="warp">
+    <button id="btn">测试(jquery)</button>
+    <button id="btn1">测试(原生)</button>
+    <br/>
+    <input type="text" name="msg1"/><br/>
+    <input type="text" name="msg2"/><br/>
+
+    <script type="text/javascript">
+        window.onload=function (){
+            var btn=document.getElementById('btn1')
+            btn.onclick=function (){
+                alert(this.innerHTML)
+                var a=document.createElement('input')
+                var b=document.createElement('br')
+                document.getElementById('box').appendChild(a)
+                document.getElementById('box').appendChild(b)
+            }
+        }
+    </script>
+</div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="example1"></div>
+    <div id="example2"></div>
+
+
+
+     <!-- 引入react核心库 -->
+     <script src="js/react.development.js" type="text/javascript"></script>
+     <!-- 引入react.dom,用于操作dom -->
+     <script src="js/react-dom.development.js" type="text/javascript"></script>
+     <!-- 引入babel,用于解析jsx为js -->
+     <script src="js/babel.min.js" type="text/javascript"></script>
+
+    
+     <script  type="text/babel">
+        //第一种定义组件的方式   ------  使用工厂函数创建组件 
+        //如果渲染标签时,首字母是小写的,尝试着寻找html与之对应的标签进行渲染,如果未找到报错
+        //如果渲染标签时,首字母是大写的,尝试着寻找组件是否定义,定义了获取组件的内容,未定义报错
+
+        function Mycomponent(){
+            console.log(this)       //工厂函数中的this编译后是undefined
+            return (
+                <div>
+                    <h1>我是工厂函数创建的组件(一些简单组件使用此方法创建)</h1>
+                    <Haha/>    
+                </div>
+            )
+        }
+        function Haha(){
+            return <h2>哈哈</h2>
+        }
+
+        /*
+            以下代码做了哪些事:
+                1. 寻找组件是否定义
+                2. 若定义了,调用与组件标签同名的那个工厂函数,返回渲染值
+        */
+        ReactDOM.render(<Mycomponent/>,document.getElementById('example1'))
+
+
+
+
+        //第二种定义组件的方式  -----  ES6类组件
+        class Mycomponent2 extends React.Component{
+            // constructor(a){
+            //     super(a)
+            // }
+            //重写父类定义的render
+            render(){
+                console.log(this)       //类组件中render方法里的this是组件类的实例对象
+                return <h1>我是ES6类组件(一些复杂组件用这种方式创建)</h1>
+            }
+        }
+        /*
+            以下代码做了那些事
+                1. 创建了一个Mycomponent2的实例对象
+                2. 通过该实例调用到了render,从而获取到了返回值
+        */
+        ReactDOM.render(<Mycomponent2/>,document.getElementById('example2'))
+    </script>
+</body>
+</html>

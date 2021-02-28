@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery-1.10.1.js"></script>
+    <style>
+        #top{
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            position: fixed;
+            right:300px;
+            bottom: 200px;
+        }
+    </style>
+</head>
+<body style="height: 2000px">
+    <div id="top"></div>
+
+    <script>
+        var time=1000;
+        var itemTime=30;
+
+        $('#top').click(function (){
+            // 获取偏移量
+            var offset=$('html').scrollTop()+$('body').scrollTop()
+            var itemOffset=offset/(time/itemTime)
+            console.log(itemOffset)
+            var timer=setInterval(function (){
+                offset-=itemOffset
+                if(offset<=0){
+                    offset=0;
+                    clearInterval(timer)
+                }
+                console.log(offset)
+               $('html,body').scrollTop(offset)
+            },itemTime)
+        })
+    </script>
+</body>
+</html>

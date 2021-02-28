@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery-1.10.1.js"></script>
+    <script src="My_jQuery.js"></script>
+</head>
+<body>
+<input type="checkbox" >
+<input type="checkbox" >
+<input type="checkbox" >
+<button id="btn1">全选</button>
+<button id="btn2">全不选</button>
+<button id="btn3">反选</button>
+<script>
+    console.log($.min(9,5))
+    console.log($.leftTrim('       12       4545'))
+    $('#btn1').click(function (){
+        $(':checkbox').checkAll()
+    })
+    $('#btn2').click(function (){
+        $(':checkbox').uncheckAll()
+    })
+    $('#btn3').click(function (){
+        $(':checkbox').reverseCheck()
+    })
+</script>
+</body>
+</html>

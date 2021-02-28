@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas{
+            border: 1px solid #000000;
+        }
+    </style>
+</head>
+<body>
+<canvas width="500px" height="600px"></canvas>
+</body>
+<script>
+    var canvas=document.querySelector('canvas')
+    var ctx=canvas.getContext('2d');
+
+    //边框图形的绘制
+    //方法1
+    // ctx.strokeRect(100,100,200,200);
+
+    //方法2
+    ctx.rect(100,100,100,100);
+    //边框绘制
+    ctx.stroke();
+
+</script>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <title>Title</title>
+</head>
+<body>
+<img data-src="https://i.picsum.photos/id/10/400/400.jpg?hmac=PIwVt0zDIDLjFhsKCUPaltt0400fYkh4vldbdFvqEz4" alt="">
+<button>点击加载图片</button>
+</body>
+<script>
+    var btn = document.querySelector('button');
+    var img = document.querySelector('img');
+    btn.onclick = function () {
+        // var src=img.getAttribute('data-src');
+        var src=img.dataset.src;
+        img.src = src;
+    }
+</script>
+</html>

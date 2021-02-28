@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+<!--
+    ejs语法;
+            1. < %% >       里面可以写任意js代码,但是不会向浏览器输出任何东西
+            2. < %-% >      能够将后端传递过来对象指定key对应的value渲染到页面(渲染标签,不转义)
+            3. < %=% >      能够读取变量将内容渲染到页面(不渲染标签,也就是说转义)
+-->
+    <%
+        for(var i=0;i<persons.length;i++){
+            let item=persons[i]%>
+            <ul>
+                <li>姓名: <%=item.name%></li>
+                <li>年龄: <%=item.age%></li>
+            </ul>
+
+        <%}%>
+</ul>
+</body>
+</html>

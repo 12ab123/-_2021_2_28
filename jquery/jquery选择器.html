@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../jquery-1.10.1.js"></script>
+    <script type="text/javascript">
+        $(function (){
+            // 选择id为div1的元素
+            $('#div1').css('background','pink')
+
+            // 选择所有div元素
+            $('div').css('background','yellow')
+
+            // 选择所有class属性为box的元素
+            $('.box').css('background','red')
+
+            // 选择所有div和span元素
+            $('div,span').css('background','blue')
+
+            // 选择所有class属性为box的div属性
+            $('div.box').css('background','red')
+
+            // 选择ul下所有标签
+            $('ul span')
+
+            // 选择第一个div
+            $('div:first').css('background','pink')
+
+            // 选择最后一个div
+            $('div:last').css('background','pink')
+
+            // 选择所有class属性不为box的div
+            $('div:not(.box)').css('background','yellow')
+
+            // 选择第一个和第二个li元素
+            // gt:选择下标大于0的所有元素
+            // lt:选择下标小于2的所有元素
+            // 当我们使用gt将大于0的元素提取后，大于0的元素的下标要减去1，然后再使用lt去提取
+            $('li:gt(0):lt(2)').css('background','red')
+
+            // 列出内容为BBBBB的元素
+            $('li:contains(BBBBB)').css('background','blue')
+
+            // 选择所有隐藏的li
+            $('li:hidden').css('background','red')
+
+        })
+    </script>
+</head>
+<body>
+    <div id="div1" class="box">div1(class="box")</div>
+    <div id="div2" class="box">div2(class="box")</div>
+    <div id="div3">div3</div>
+    <span class="box">span(class="box")</span>
+
+    <br>
+    <ul>
+        <li>AAAAA</li>
+        <li title="hello">BBBBB(title="hrllo")</li>
+        <li class="box">CCCCC(class="box")</li>
+        <li title="hello">DDDDD(title="hello")</li>
+    </ul>
+</body>
+</html>

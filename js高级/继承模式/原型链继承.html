@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>   
+    // 原型继承:    子类的原型成为父类的实例对象 
+            //问题: 没有constructor
+            //解决: 添加constructor
+        function Person(name,age){
+            this.name=name
+            this.age=age
+        }
+        Person.prototype.showName=function (){
+            console.log(this.name)
+        }
+
+        var person1=new Person('laijiandong','12')
+        person1.showName()
+
+        function Child(name,age){
+            this.name=name
+            this.age=age
+        }
+        //原型继承
+        Child.prototype=new Person()
+        Child.prototype.constructor=Child
+        var child1=new Child('zhangsan','13')
+        console.log(child1)
+        child1.showName()
+
+    </script>
+</body>
+</html>

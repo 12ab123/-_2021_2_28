@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    const p=new Promise((resolve, reject)=>{
+        //只有第一个会起作用,其他的不会起作用
+        resolve(1)          //pending ----- resolved
+        reject(2)           //pending ----- rejected
+        throw 3             //pending ----- rejected(抛出异常)
+    })
+
+    p.then(
+        value => {console.log('onResolved',value)},
+        reason => {console.log('onRejected',reason)}
+    )
+    //允许指定多个回调,共存
+    p.then(
+        value => {console.log('onResolved1',value)},
+        reason => {console.log('onRejected1',reason)}
+    )
+</script>
+</body>
+</html>

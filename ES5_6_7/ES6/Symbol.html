@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        概念: ES6中添加了一种原始数据类型symbol
+        特点:
+            1. symbol属性对应的值是惟一的,解决命名冲突问题
+            2. symbol值不能与其他数据进行计算,包括同字符串拼串
+            3. for  in,for  of遍历时不会遍历symbol属性
+
+     -->
+    <script  type="text/javascript">
+        //使用symbol
+        let symbol=Symbol()
+        
+        console.log(symbol)
+        console.log(typeof symbol)
+    </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery-1.10.1.js"></script>
+</head>
+<body style="height: 2000px">
+    <div id="box" style="border: 1px solid black;width: 100px;height: 150px;overflow: auto">
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+        this is some text
+
+    </div>
+
+    <button id="btn1">得到scrollTop</button>
+    <button id="btn2">设置scrollTop</button>
+
+    <script>
+        // 获取指定盒子移动的距离
+        $('#btn1').click(function (){
+            console.log($('#box').scrollTop())
+            // 在Chrome浏览器中，$('body').scrollTop()无法测出值，但是$('html').scrollTop()可以
+            // 在ie浏览器中，$('html').scrollTop()无法测出值，但是$('body').scrollTop()可以
+            // 兼容写法
+            console.log($('body').scrollTop()+$('html').scrollTop())
+
+            // 如果jquery版本新，可以使用document
+            console.log($('document').scrollTop())
+
+        })
+
+        //
+        $('#btn2').click(function (){
+            $('#box').scrollTop(300)
+
+            // 处理兼容
+            $('html').scrollTop(500)
+            $('body').scrollTop(500)
+
+            // 如果jquery版本新，可以使用document
+            $('document').scrollTop(500)
+        })
+    </script>
+</body>
+</html>

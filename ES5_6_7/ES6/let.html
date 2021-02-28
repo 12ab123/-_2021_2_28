@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+
+    <script  type="text/javascript">
+        /*
+            let的作用
+                1. 不能重复申明
+                2. 会预处理,有变量提升,但是不能提前使用提升的变量
+                3. 会创建块级作用域(用于遍历)
+
+                let变量提升:
+                    全局变量提升:
+                        会创建一个变量对象(script)用来收集全局作用域下let定义的变量,但是没有赋值
+                    局部变量提升:
+                        会将var let定义的变量全部放到当前函数的变量对象中
+                    
+                同var的变量提升的区别
+                    let提升的变量在未赋值前不允许被使用
+        */
+
+        var btns=document.querySelectorAll('button')
+
+
+
+        //使用闭包
+        // for(var i=0;i<btns.length;i++){
+        //     (function (i){
+        //         btns[i].onclick=function (){
+        //             alert(i)
+        //         }
+        //     })(i)
+        // }
+
+
+        //使用let
+        //每次let i时,i都会创建一块块级作用域,作用域中存放了当前i的值还有事件监听函数
+        for(let i=0;i<btns.length;i++){
+            btns[i].onclick=function (){
+                alert(i)
+            }
+        }
+    </script>   
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+    <style>
+        *{
+             padding: 0;
+             margin: 0;
+        }
+        ul{
+             list-style: none;
+        }
+        #box{
+            width: 100%;
+            height: 200px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+</body>
+<script>
+    var box=document.getElementById('box');
+    box.addEventListener('touchstart',function (e) {
+        var x=e.changedTouches[0].clientX;
+        var y=e.changedTouches[0].clientY;
+        box.innerHTML='x轴的宽度为'+x+'<br>'+'y轴的宽度为'+y;
+    });
+
+    box.addEventListener('touchmove',function (e) {
+        var x=e.changedTouches[0].clientX;
+        var y=e.changedTouches[0].clientY;
+        box.innerHTML='x轴的宽度为'+x+'<br>'+'y轴的宽度为'+y;
+    });
+
+    document.documentElement.addEventListener('touchstart',function (e) {
+        e.preventDefault();
+    },{
+        passive:false
+    })
+</script>
+</html>

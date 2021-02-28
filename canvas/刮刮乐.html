@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas {
+            display: block;
+            margin: 50px auto;
+            border: solid 1px #000;
+            background-image: url("../img/t1.jpg");
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+<canvas></canvas>
+
+<script>
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
+
+    canvas.width = 600;
+    canvas.height = 500;
+
+    ctx.fillStyle = '#ccc';
+    ctx.fillRect(0, 0, 600, 500);
+
+    ctx.globalCompositeOperation = 'destination-out';
+
+    var isDown = false;
+
+    canvas.onmousedown = function (e) {
+        ctx.beginPath();
+        ctx.moveTo(e.offsetX, e.offsetY);
+        ctx.lineWidth = 20;
+        isDown = true;
+    };
+
+    canvas.onmousemove = function (e) {
+        if (isDown) {
+            ctx.lineTo(e.offsetX, e.offsetY);
+            ctx.stroke();
+        }
+
+    };
+
+    canvas.onmouseup = function () {
+        isDown = false;
+    };
+
+</script>
+</body>
+</html>

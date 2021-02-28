@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+        错误穿透:
+            当传入then中的promise对象状态没有对应的处理时,默认会写
+     */
+    new Promise((resolve, reject)=>{
+        reject(1)
+    }).then(
+        value => console.log(value),
+        reason => {throw reason}        //默认,当你不写这种处理方式时,自动会有
+
+    ).then(
+        value => console.log(value),
+        reason => {throw reason}
+    ).then(
+        value => console.log(value),
+        reason => {return Promise.reject(reason)}
+    ).catch(
+        reason => console.log(reason)
+    )
+</script>
+</body>
+</html>

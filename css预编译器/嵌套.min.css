@@ -1,0 +1,1 @@
+*{padding:0;margin:0}ul{list-style:none}#warp{width:400px;border:1px solid #000;margin:50px auto}#warp ul{width:100%}#warp ul li{height:40px;width:100%;line-height:40px}#warp ul li:hover{background:pink}#warp ul li:nth-child(2):hover{background:yellow}

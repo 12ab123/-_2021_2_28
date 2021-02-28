@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="http://www.baidu.com">百度</a>
+</body>
+<script>
+    var a=document.querySelector('a');
+    a.onclick=function (event) {
+        event=event||window.event;
+        alert('aaaaa');
+        // return false;
+        event.preventDefault();
+    };
+
+    // 取消在页面中右键中出现的菜单
+    window.oncontextmenu=function (event) {
+        event=event||window.event;
+        event.preventDefault();
+
+    }
+</script>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>    
+        function Person(name,age){
+            this.name=name
+            this.age=age
+        }
+        var person1=new Person('zhangsan','12')
+
+        function Child(name,age,sex){
+            //如果直接调用Person函数,this执行window,所以借助call方法使this指向实例对象
+            Person.call(this,name,age)
+            this.sex=sex
+        }
+
+        var child1=new Child('lisi','13','男')
+        console.log(child1)
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //基本数据的特点: 一旦定义不会发生改变
+
+        var a=123;      //a是基本数据类型,值保存在栈中
+        a=234           //此行为不是修改存放值123的地址的值,而是让a指向另一个地址,值为234
+
+
+        var b={name:'kebi'}         //b是引用数据类型,值保存在堆中,b保存在栈中,b存放的是值在堆中的地址
+        b.name='laijiandong'        //修改对象的属性,不会改变内存地址,而是修改内存地址中存放的内容
+        b={name:'wuliiuqi1'}        //操作对象本身,会导致指针发生改变
+
+
+        //typeof检测数据类型,返回值: string  number  boolean  undefined  function  object
+    </script>
+</body>
+</html>

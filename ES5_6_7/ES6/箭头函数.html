@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>1</button>
+    <button>2</button>
+
+    <script  type="text/javascript">
+        console.log('--------------常规函数---------------')
+        let fun=function (){
+            console.log('fun()')
+        }
+        fun()
+
+
+        console.log('--------------箭头函数 --没有形参 ---------------')
+        //当箭头函数没有形参时,()不能省略
+        let fun1=()=>{
+            console.log('fun1()')
+        }
+        fun1()
+
+        console.log('--------------箭头函数 --有一个形参 ---------------')
+        //可以省略()
+        let fun2=a=>{
+            console.log('fun2()',a)
+        }
+        fun2('123')
+
+        console.log('--------------箭头函数 --有多个形参 ---------------')
+        //不可以省略()
+        let fun3=(a,b)=>{
+            console.log('fun3()',a,b)
+        }
+        fun3('123','234')
+
+
+        console.log('--------------箭头函数 --函数体只有一条语句的时候 ---------------')
+        //当箭头函数的函数体只有一条语句时,可以省略{},当{}省略后会自动return当前语句或表达式的结果
+        let fun4=()=>console.log('fun4()')
+        fun4()
+
+
+        console.log('--------------箭头函数 --this的指向问题 ---------------')
+        let btn=document.querySelectorAll('button')
+        btn[0].onclick=function (){
+            console.log(this)
+        }
+
+        btn[1].onclick=()=>console.log(this)        //window
+
+
+    </script>
+</body>
+</html>

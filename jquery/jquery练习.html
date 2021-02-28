@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery-1.10.1.js"></script>
+    <style>
+        .home{
+            width: 500px;
+            margin: 50px auto;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+        }
+        .home .top{
+            margin: 10px auto;
+            text-align: center;
+        }
+        .home .top input{
+            width: 450px;
+            height: 25px;
+            border-radius: 5px;
+            border: 1px solid #cccccc;
+
+        }
+        .home .top input:focus{
+            border: 1px solid #cccccc;
+        }
+        .list{
+            width: 430px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            margin: 20px auto;
+            list-style: none;
+        }
+        .bottom{
+            width: 450px;
+            height: 30px;
+            margin: 0 auto;
+        }
+        .bottom button{
+            width: 150px;
+            height: 28px;
+            background-color: hotpink;
+            border-radius: 5px;
+            color: #fff;
+            float:right;
+            margin-top:-5px;
+        }
+        /*.home .list .li1:hover{*/
+        /*    background-color: #cccccc;*/
+        /*}*/
+
+    </style>
+</head>
+<body>
+    <div class="home">
+        <div class="top">
+            <input type="text" placeholder="输入你的任务名称，按回车键确认">
+        </div>
+
+        <ul class="list">
+
+        </ul>
+        
+        <div class="bottom">
+            <input type="checkbox" id="checkAll">
+            <span>已完成<span id="allClickTodos">0</span> / 全部<span id="allTodos">0</span></span>
+            <button>清除已完成任务</button>
+        </div>
+    </div>
+
+    <script>
+        $(function (){
+            // 获取全选按钮
+            var $checkAll=$('#checkAll')
+            // 获取ul元素
+            var $todoMain=$('.list')
+
+            // 获取清除已完成任务的元素
+            var removeAll=$('.bottom button')
+
+            // 获取已完成任务的元素
+            var $allClickTodos=$('#allClickTodos')
+
+            // 获取文本框的按钮
+            var $newTodo=$('.home .top input')
+            var dataJson=[
+                {'content':'吃饭'},
+                {'content':'睡觉'},
+                {'content':'打游戏'}
+            ]
+            // 创建li的函数
+            function bingData(data){
+                // 遍历data
+                for(var i=0;i<data.length;i++){
+                    // 将data的每一个对象的属性content的值传入li的span中，创建li添加到ul中
+                    $todoMain.append('<li class="li1" style="width: 100%;height: 30px;line-height: 30px">\n' +
+                        '                <input type="checkbox">\n' +
+                        '                <span>'+data[i].content+'</span>\n' +
+                        '                <button class="button1" style="float:right;margin-right: 10px;margin-top: 5px;display: none">Delete</button>\n' +
+                        '            </li>')
+                }
+            }
+
+            // 调用创建li的函数，将全局对象dataJson的值传入
+            bingData(dataJson)
+
+            // 刷新任务的数目
+            allTodos()
+
+            // 刷新已完成任务的数目
+            allClickTodos()
+
+            // 获取任务的数目
+            function allTodos(){
+                $('#allTodos').html($todoMain.children('li').length)
+            }
+
+            // 获取已完成任务的数目
+            function allClickTodos(){
+                $allClickTodos.html($todoMain.find(':checkbox:checked').length)
+            }
+
+            // 点击li中的选择框时执行的动作
+            $todoMain.delegate('.li1 input','click',function (){
+                allClickTodos()
+                // 刷新全选按钮的状态
+                $checkAll.prop('checked',$todoMain.find(':checkbox:not(:checked)').length==0)
+
+            })
+
+            // 点击全选框的动作
+            $checkAll.click(function (){
+                // 将ul中的选择框的状态全部设为选中
+                $todoMain.find(':checkbox').prop('checked',this.checked)
+                // 刷新完成任务的数目
+                allClickTodos()
+            })
+
+            // 鼠标移入li的样式
+            $todoMain.delegate('li','mouseenter',function (){
+                $(this).css('background','#ccc')
+                $(this).children('button').css('display','inline-block')
+            })
+
+            // 鼠标移出li的样式
+            $todoMain.delegate('li','mouseleave',function (){
+                $(this).css('background','#fff')
+                $(this).children('button').css('display','none')
+            })
+
+            // 点击删除按钮的动作
+            $todoMain.delegate('li button','click',function (){
+                // 删除点击按钮的父元素li
+                $(this).parent().remove()
+
+                // 刷新已完成的任务数目
+                allClickTodos()
+
+                // 刷新任务数目
+                allTodos()
+
+                // 防止全选按钮失灵
+                // 当任务的数目为零时，全选按钮不会被选中
+                // 并且当没有完成的任务的数目不为零时，全选按钮不会被选中
+                $checkAll.prop('checked',$todoMain.children('li').length!=0&&$todoMain.find(':checkbox:not(:checked)').length==0)
+            })
+
+            // 点击删除已完成任务的按钮执行的动作
+            removeAll.click(function (){
+                // 删除所有ul中被选中的按钮的父元素li
+                $todoMain.find(':checkbox:checked').parent().remove()
+                // 刷新完成任务的数目
+                allClickTodos()
+                // 刷新任务数目
+                allTodos()
+                // 将全选按钮选中状态恢复为false
+                $checkAll.prop('checked',$todoMain.children('li').length!=0&&$todoMain.find(':checkbox:not(:checked)').length==0)
+
+            })
+
+            // 点击文本框执行的动作
+            $newTodo.keydown(function (event){
+                // 输入内容后点击回车执行的动作
+                if(event.keyCode=='13'){
+                    // 判断内容是否为空
+                    if($.trim($(this).val())){
+                        // 将内容创建成一个对象
+                        var data=[
+                            {'content':$(this).val()}
+                        ]
+                        // 调用创建li的函数，将data输入
+                        bingData(data)
+                        allClickTodos()
+                        allTodos()
+                        // 将全选按钮的状态设置为false
+                        $checkAll.prop('checked',false)
+
+                    }else{
+                        alert('请输入空信息')
+                    }
+                    // 执行完之后情况文本框
+                    $(this).val('')
+
+                }
+            })
+        })
+    </script>
+</body>
+</html>

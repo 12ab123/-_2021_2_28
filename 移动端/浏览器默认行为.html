@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+    <title>title</title>
+</head>
+<style>
+    *{
+         padding: 0;
+         margin: 0;
+    }
+    ul{
+         list-style: none;
+    }
+    #box{
+        width: 100%;
+        height: 2000px;
+        background: linear-gradient(to bottom,#98a ,#aef);
+    }
+</style>
+<body>
+<div id="app">
+    <div id="box">
+        <a href="http://www.baidu.com">兰亭机选</a>
+        <div>作者:<input type="text"></div>
+        <p>武侯墓，即诸葛亮墓，位于汉中市勉县的定军山脚下，因诸葛亮曾获封武乡侯而得名武侯墓。建兴十二年蜀汉丞相诸葛亮与魏司马懿在渭河两岸相抗，病死于五丈原军中，葬汉中的定军山下。
+            诸葛亮墓周围有定军山、少祖山下沿的九条小山岗环抱，九条山岗由青沟、罔子沟、井沟、斩地沟、田家沟、牛角沟、瓦洞沟、龙嘴沟八条小溪分割而成。墓前上岗三层，自定军山向西叠浪而来，约三里许至此成眠弓形，古称“三台书案”。
+            从少祖山下六岗向东势若游龙，倏起忽落五六里，至墓后形成新月者半里许，传为墓之正脉。新月之下，眠弓之内，豁然开张平地三百余亩，左右前后九支环抱，其天造地设实为人工所不能者。
+            1996年，诸葛亮墓被列为全国重点文物保护单位。建安十二年（公元207年），刘备依附于刘表，屯兵于新野，徐庶向刘备推荐诸葛亮。刘备便亲自前往隆中拜访，去了三次才见到诸葛亮。刘备向诸葛亮询问重振天下之策，诸葛亮遂向他陈说了三分天下之计，分析了曹操不可取，孙权可作援的形势；又详述了荆、益二州的州牧懦弱，有机可乘，而且只有拥有此二州才可争胜天下；更向刘备讲述了攻打中原的战略。这篇论说后世称之为《隆中对》。刘备听后大赞，力邀诸葛亮相助，于是诸葛亮便出山入幕。刘备常常和他议论，关系也日渐亲密。
+            关羽、张飞等大感不悦，刘备向他们解释道：“我有了孔明，就像鱼得到水般，希望诸位不要再说了。”关羽、张飞等便不再抱怨。刘备据其谋略联吴抗曹，取得赤壁之战的胜利；占领荆、益，建立了蜀汉政权。曹丕代汉后，他帮助刘备称帝，任丞相。
+            建兴元年（公元223年），刘禅继位，被封为武乡侯，领益州牧，政事无论大小，都由他决定。他励精图治，赏罚严明，推行屯田政策，并改善和西南各族的关系，促进了当地经济、文化的发展。传说他革新连弩，能连续发射十箭，又制造“木牛流马”，有利于山地运输。曾五次出兵攻魏，争夺中原。建兴十二年（234年）八月，诸葛亮病故于五丈原（宝鸡境内），享年五十四岁，遗言命令部下将自己葬在汉中定军山，依山势修建坟墓，墓穴仅能容纳下棺材，穿平时的衣服入殓，不必用其他器物殉葬。遂归葬勉县定军山脚下武侯墓
+        </p>
+    </div>
+</div>
+    <script>
+        var p=document.querySelector('p');
+        var app=document.getElementById('app');
+        var a=document.querySelector('a');
+        var input=document.querySelector('input');
+        app.addEventListener('touchstart',function(event){
+            event.preventDefault();
+        });
+        p.addEventListener('touchstart',function (e) {
+            e.stopPropagation();
+        });
+        a.addEventListener('touchstart',function (e) {
+            e.stopPropagation();
+        });
+        input.addEventListener('touchstart',function (e) {
+            e.stopPropagation();
+        });
+    </script>
+</body>
+</html>

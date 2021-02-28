@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let p=new Promise((resolve, reject) => {
+        resolve(1)
+    })
+
+    p.then(
+        value => {
+            //1. 抛出错误
+            // throw 123
+            //2. 返回的结果为非promise对象
+            return 521
+        },
+        reason => {
+
+        }
+    )
+
+</script>
+</body>
+</html>

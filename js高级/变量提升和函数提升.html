@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            变量提升: 找到var以后将var后面的变量提前声明，但是不会赋值
+            函数提升: 找到function以后定义对应的函数，也就是说，函数在预解析的时候已经定义完毕
+        */
+        console.log(a)      //undefined
+        b()                 //123
+        var a=10
+        function b(){
+            console.log('123')
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="">
+<!--    <meta name="viewport" content="width=device-width,initial-scale=1.0">-->
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #box{
+            width: 200px;
+            height: 200px;
+            background-color: #cccccc;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+</body>
+<script>
+    var a=document.getElementById('box');
+    // var b=document.documentElement.clientWidth;
+    // var c=window.innerWidth;
+    setInterval(function () {
+        a.innerHTML='布局视口的宽度为'+document.documentElement.clientWidth+'<br>'+'视觉视口的宽度为'+window.innerWidth;
+    },100);
+
+    console.log(document.documentElement.clientWidth);
+    console.log(window.innerWidth);
+</script>
+</html>

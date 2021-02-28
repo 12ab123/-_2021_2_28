@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas {
+            display: block;
+            margin: 50px auto;
+            border: solid 1px #000;
+        }
+    </style>
+</head>
+<body>
+<canvas></canvas>
+
+<script>
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
+
+    canvas.width = 600;
+    canvas.height = 400;
+
+    //目标图形
+    ctx.fillStyle = 'red';
+    ctx.fillRect(100, 100, 300, 50);
+
+    //设置合成规则
+    ctx.globalCompositeOperation = 'destination-over';
+
+    //源图形
+    ctx.fillStyle = 'yellow';
+    ctx.fillRect(100, 100, 50, 300);
+
+</script>
+</body>
+</html>

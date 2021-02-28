@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #box{
+            width: 200px;
+            height: 200px;
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<script>
+    var box=document.getElementById('box');
+    box.addEventListener('touchstart',function () {
+        box.style.backgroundColor='red';
+    });
+    box.addEventListener('touchmove',function () {
+        box.style.backgroundColor='yellow';
+        box.innerHTML=Math.round(Math.random()*100);
+    });
+    box.addEventListener('touchend',function () {
+        box.style.backgroundColor='#abf';
+    });
+
+    // 当触摸被打断时触发的事件(比如来电话时)
+    box.addEventListener('touchcancel',function () {
+        box.style.backgroundColor='black';
+    });
+
+    setTimeout(function () {
+        alert('aaaaa')
+    },4000)
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas {
+            border: 1px solid #000000;
+            display: block;
+            margin: 100px auto;
+        }
+    </style>
+</head>
+<body>
+<canvas width="600px" height="600px"></canvas>
+</body>
+<script>
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
+
+    ctx.fillRect(100, 100, 300, 200);
+
+    //擦除指定区域
+    //第一个参数为起始水平位置
+    //第二个参数为起始垂直位置
+    //第三个参数为擦除的宽度
+    //第四个参数为擦除的高度
+    ctx.clearRect(120, 120, 200, 100);
+</script>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    new Promise((resolve, reject)=>{
+        resolve(1)
+    }).then(
+        value => console.log(value)
+    ).then(
+        value => console.log(value)
+    ).then(
+        value => {
+            return new Promise(()=>{})          //中断promise,由于传入的对象状态为pending,所以不会继续执行
+        }
+    ).then(
+        value => console.log(value)
+    )
+</script>
+</body>
+</html>

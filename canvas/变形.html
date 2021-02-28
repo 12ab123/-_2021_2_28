@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas {
+            border: 1px solid #000000;
+            display: block;
+            margin: 100px auto;
+        }
+    </style>
+</head>
+<body>
+<canvas width="600px" height="600px"></canvas>
+</body>
+<script>
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
+
+    //保存当前的绘制状态(   坐标系    画笔状态    颜色      宽度      样式)
+    ctx.save();
+
+
+    //开始绘制
+    ctx.beginPath();
+    //移动坐标系的位置
+    ctx.translate(200, 200);
+    //移动坐标系的角度
+    ctx.rotate(-67 / 180 * Math.PI);
+    //放大或缩小坐标系的大小
+    ctx.scale(0.8, 1);
+    //移动起始位置
+    ctx.moveTo(0, 0);
+    //移动画笔绘制到下一个坐标点
+    ctx.lineTo(200, 200);
+    ctx.stroke();
+
+
+
+    //还原为上一个状态
+    ctx.restore();
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(100, 100);
+    ctx.stroke();
+</script>
+</html>

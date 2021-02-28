@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: #acf5fa;
+        }
+    </style>
+</head>
+<body>
+<div></div>
+<script>
+    var div = document.querySelector('div');
+    var index = 0;
+    var id = 0;
+
+    function move() {
+        index++;
+        div.style.transform = 'translateX(' + index + 'px)';
+        id = requestAnimationFrame(move)
+
+    }
+
+    id = requestAnimationFrame(move);
+
+    setTimeout(function () {
+        cancelAnimationFrame(id);
+    }, 2000)
+</script>
+</body>
+</html>

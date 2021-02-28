@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 100rem">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        #app {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0.74rem 0.26rem 0rem;
+        }
+
+        #header {
+            width: 3.23rem;
+            height: 1.45rem;
+            background: #76d1a7;
+        }
+
+        #content{
+            width: 3.23rem;
+            padding-top: 0.22rem;
+            display: flex;
+            justify-content: space-between;
+        }
+        #content .left{
+            width: 0.63rem;
+            height: 2.04rem;
+            background: #c464a5;
+        }
+        #content .right{
+            width: 2.38rem;
+            height: 3.25rem;
+            background: #687cc3;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div id="header"></div>
+    <div id="content">
+        <div class="left"></div>
+        <div class="right"></div>
+    </div>
+</div>
+</body>
+<script>
+    document.documentElement.style.fontSize = document.documentElement.clientWidth * 100 / 375 + 'px';
+    window.onresize=function () {
+        document.documentElement.style.fontSize = document.documentElement.clientWidth * 100 / 375 + 'px';
+    }
+</script>
+</html>

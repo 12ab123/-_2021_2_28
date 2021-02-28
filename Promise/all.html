@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let p1=new Promise((resolve, reject) => {
+        resolve(1)
+    })
+    let p2=Promise.resolve(2)
+    let p3=Promise.resolve(3)
+    let p4=Promise.reject(4)
+
+    //当输入的promise对象都是正确的时,结果为正确,值为输入的promise对象结果组成的一个数组
+    let result=Promise.all([p1,p2,p3])
+    console.log(result);
+
+    //当输入的promise对象有一个为错误的时,结果为错误,值为输入的promise对象错误的值
+    let result2=Promise.all([p1,p2,p4])
+    console.log(result2);
+</script>
+</body>
+</html>

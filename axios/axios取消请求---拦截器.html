@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button onclick="getProducts1()">获取商品列表1</button>
+<button onclick="getProducts2()">获取商品列表2</button>
+<button onclick="cancelReq()">取消请求</button>
+<script src="node_modules/axios/dist/axios.js"></script>
+<script>
+    axios.defaults.baseURL = 'http://localhost:4000'
+    let cancel
+
+    axios.interceptors.request.use((config) => {
+        //如果有未完成的请求,取消掉这个请求,执行当前请求
+        if (cancel) {
+            cancel('强制取消')
+        }
+        //添加cancelToken配置
+        config.cancelToken = new axios.CancelToken((c) => {     //在CancelToken同步执行,并传入用于取消请求的函数
+            cancel = c
+        })
+
+        return config           //必须返回
+    })
+
+    axios.interceptors.response.use(
+        response=>{
+            cancel = null
+            return response
+        },error => {
+            if (axios.isCancel(error)) {
+                alert('取消请求'+error.message)
+            } else {
+                cancel = null
+                alert('请求错误'+error.message)
+            }
+            return new Promise(()=>{})
+        }
+    )
+
+
+    function getProducts1() {
+
+        axios('getProducts1').then(
+            response => {
+                console.log('111 onResolved', response.data)
+            }
+        )
+    }
+
+    function getProducts2() {
+        axios('getProducts2').then(
+            response => {
+                console.log('222 onResolved', response.data)
+            }
+        )
+    }
+
+    function cancelReq() {
+        if (cancel) {
+            cancel('强制取消')         //取消成功后返回的信息,状态为rejected
+        }
+    }
+</script>
+</body>
+</html>

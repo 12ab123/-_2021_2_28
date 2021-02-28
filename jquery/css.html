@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../jquery-1.10.1.js"></script>
+</head>
+<body>
+    <p style="color: red">aaaaaaaa</p>
+    <p style="color: blue">bbbbbbbb</p>
+
+    <script type="text/javascript">
+        // 得到第一个p标签的颜色
+        console.log($('p:first').css('color'))
+
+        // 设置所有p标签的颜色为pink
+        $('p').css('color','pink')
+
+        // 设置第2个字体颜色为(#ff0011)，背景为(blue)，宽(300px)，高(30px)
+        $('p:last').css({
+            // 传入的是一个对象
+            'color':'#ff0011',
+            'backgroundColor':'blue',
+            'width':'300px',
+            'height':'30px'
+        })
+    </script>
+</body>
+</html>

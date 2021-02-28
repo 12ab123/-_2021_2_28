@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <title>画板</title>
+    <style>
+        canvas {
+            display: block;
+            margin: 100px auto;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+<canvas width="600px" height="500px"></canvas>
+</body>
+<script>
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
+
+    //第一个参数为起始水平位置
+    //第二个参数为起始垂直位置
+    //第三个参数为圆弧半径
+    //第四个参数为圆弧起始角度(单位为弧度)
+    //第五个参数为圆弧结束角度(单位为弧度)
+    //第六个参数为是否为逆时针
+    //弧度如何转化为角度     角度/180*π
+    //旋转的零度默认在最右侧,顺时针为正角度,逆时针为负角度
+    ctx.arc(200, 200, 100, 0, 60 / 180 * Math.PI,true);
+    ctx.stroke();
+
+</script>
+</html>

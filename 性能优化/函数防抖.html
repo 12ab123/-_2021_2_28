@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数防抖测试</title>
+</head>
+<body>
+<input type="text">
+<button>搜索</button>
+<script>
+    let inputNode=document.querySelector('input');
+    let timer;
+    inputNode.addEventListener('keyup',function () {
+        let value=inputNode.value;
+        if(timer){
+            clearTimeout(timer);
+        }
+        timer=setTimeout(function () {
+            sendAjax(value);
+        },300);
+    });
+
+    function sendAjax(data) {
+        console.log('发送了一次Ajax请求,内容为' + data );
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <title>轮播图</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        html, body, #app {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #swiper-container {
+            width: 100%;
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+        }
+
+        .swiper-wrapper {
+            width: 600%;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .swiper-slide {
+            float: left;
+
+
+
+        }
+
+        .swiper-slide img {
+            width: 100%;
+            display: block;
+        }
+
+        .swiper-pagination {
+            position: absolute;
+            width: 100%;
+            height: 10px;
+            left: 0;
+            bottom: 10px;
+            /*background: #000;*/
+            line-height: 10px;
+            text-align: center;
+        }
+
+        .swiper-pagination span {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+            margin-right: 3px;
+        }
+
+        .swiper-pagination .active {
+            background-color: #acf5fa;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div id="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="img/1.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="img/2.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="img/3.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="img/4.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="img/5.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="img/6.jpg" alt=""></div>
+        </div>
+
+        <div class="swiper-pagination">
+            <!--            <span class="active"></span>-->
+            <!--            <span></span>-->
+            <!--            <span></span>-->
+            <!--            <span></span>-->
+            <!--            <span></span>-->
+            <!--            <span></span>-->
+        </div>
+
+    </div>
+
+</div>
+</body>
+<script>
+    app.addEventListener('touchstart', function (e) {
+        e.preventDefault();
+    });
+
+    var container = document.getElementById('swiper-container');
+    var wrapper = container.querySelector('.swiper-wrapper');
+    var dots = null;
+    var index = 0;   // 获取当前显示图片的下标
+    var len = container.querySelectorAll('.swiper-slide').length;
+    var pagination = container.querySelector('.swiper-pagination');
+    var timer = null;
+    var isHori=true;
+    var isFirst=true;
+    
+
+    //无缝滚动
+    wrapper.innerHTML += wrapper.innerHTML;
+    var lenth = container.querySelectorAll('.swiper-slide').length;
+
+    container.addEventListener('touchstart', function (e) {
+
+        wrapper.style.transition = 'none';
+        //    获取按下时的时间点
+        this.t1 = Date.now();
+
+        //    判断
+        if (index == 0) {
+            index = len;
+            var newLeft = -index * container.offsetWidth + 'px';
+            wrapper.style.left = newLeft;
+        }
+        if (index == lenth - 1) {
+            index = len - 1;
+            var newLeft = -index * container.offsetWidth + 'px';
+            wrapper.style.left = newLeft;
+        }
+        this.x = e.touches[0].clientX;
+        this.y=e.touches[0].clientY;
+        this.left = wrapper.offsetLeft;
+
+        clearInterval(timer);
+    });
+
+    container.addEventListener('touchmove', function (e) {
+        this.mx = e.touches[0].clientX;
+        var newLeft = this.mx - this.x + this.left;
+        wrapper.style.left = newLeft + 'px';
+        this.my=e.touches[0].clientY;
+
+        var disY=Math.abs(this.my-this.y);
+        var disX=Math.abs(this.mx-this.x);
+
+        if(isFirst){
+            isFirst=false;
+            if(disY>disX){
+                isHori=false;
+            }
+            if(disX>disY){
+                isHori=true;
+            }
+        }
+
+        if(isHori){
+            e.preventDefault();
+        }else {
+            return
+        }
+
+    });
+
+    wrapper.addEventListener('transitionend',function () {
+        if(index==lenth-1){
+            wrapper.style.transition='none';
+            index = len - 1;
+            var newLeft = -index * container.offsetWidth + 'px';
+            wrapper.style.left = newLeft;
+        }
+    });
+
+    // 触摸结束时的触点
+    container.addEventListener('touchend', function (e) {
+        // 获取触点的位置
+        this.mx = e.changedTouches[0].clientX;
+        wrapper.style.transition = 'all 0.3s';
+        var t2 = Date.now();
+
+        var disX = Math.abs(this.mx - this.x);
+        if (disX > container.offsetWidth / 2 || t2 - this.t1 <= 300) {
+            if (this.mx < this.x) {
+                index++
+            }
+            if (this.mx > this.x) {
+                index--
+            }
+        }
+
+        if (index < 0) {
+            index = 0;
+        }
+        if (index >= lenth) {
+            index = lenth - 1;
+        }
+
+        //    计算新的left的值
+        var newLeft = -index * container.offsetWidth + 'px';
+        wrapper.style.left = newLeft;
+
+        dots = container.querySelectorAll('.swiper-pagination>span');
+        //    点的切换
+        dots.forEach(function (dot) {
+            dot.classList.remove('active');
+        });
+
+        //    当前索引的导航点添加class
+        dots[index % len].classList.add('active');
+        autoRun();
+    });
+
+    function init() {
+        //    容器设置
+        var slides = container.querySelectorAll('.swiper-slide');
+        window.onload = function () {
+            var h = slides[0].offsetHeight;
+            for (var i = 0; i < slides.length; i++) {
+                h = h < slides[i].offsetHeight ? h : slides[i].offsetHeight;
+            }
+            container.style.height = h + 'px';
+        };
+
+        //    包裹容器的宽度设置
+        wrapper.style.width = lenth * 100 + '%';
+
+        //    幻灯片的宽度
+        slides.forEach(function (slides) {
+            slides.style.width = 100 / lenth + '%';
+        });
+
+
+        //    根据幻灯片数量创建导航点的数量
+        for (var i = 0; i < len; i++) {
+            var sp = document.createElement('span');
+            if (i == 0) {
+                sp.className = 'active';
+            }
+            pagination.appendChild(sp);
+        }
+
+
+    }
+
+    init();
+
+    //    自动播放
+    function autoRun() {
+        clearInterval(timer);
+        timer = setInterval(function () {
+            index++;
+            wrapper.style.transition='all 0.3s';
+            var newLeft = -index * container.offsetWidth + 'px';
+            wrapper.style.left = newLeft;
+
+            dots = container.querySelectorAll('.swiper-pagination>span');
+            //    点的切换
+            dots.forEach(function (dot) {
+                dot.classList.remove('active');
+            });
+
+            //    当前索引的导航点添加class
+            dots[index % len].classList.add('active');
+        }, 2000);
+
+    }
+
+    autoRun();
+    
+
+</script>
+</html>

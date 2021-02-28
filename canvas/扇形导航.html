@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        nav {
+            height: 50px;
+            width: 50px;
+            position: fixed;
+            right: 0;
+            bottom: 0;
+        }
+
+        .home {
+            transition: 1s transform;
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            border-radius: 50%;
+            background-image: linear-gradient(to bottom, red, yellow);
+            line-height: 50px;
+            text-align: center;
+            z-index: 1;
+        }
+
+        ul {
+            position: absolute;
+            width: 42px;
+            height: 42px;
+            left: 4px;
+            top: 4px;
+        }
+
+        li {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+        }
+
+        li:nth-child(1) {
+            background-image: linear-gradient(to bottom, red, blue);
+        }
+
+        li:nth-child(2) {
+            background-image: linear-gradient(to bottom, yellow, #a6e1ec);
+        }
+
+        li:nth-child(3) {
+            background-image: linear-gradient(to bottom, beige, #cccccc);
+        }
+
+        li:nth-child(4) {
+            background-image: linear-gradient(to bottom, brown, #acf5fa);
+        }
+
+        li:nth-child(5) {
+            background-image: linear-gradient(to bottom, rebeccapurple, slategray);
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <div class="home">home</div>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</nav>
+</body>
+<script>
+    var home = document.querySelector('.home');
+    var homeDeg = 0;
+    var lis = document.querySelectorAll('li');
+    var isOpen = false;
+    home.onclick = function () {
+        homeDeg += 360;
+        home.style.transform = 'rotate(' + homeDeg + 'deg)';
+        if (!isOpen) {
+            for (var i = 0; i < 5; i++) {
+                var x = -200 * Math.sin(22.5 * i / 180 * Math.PI);
+                var y = -200 * Math.cos(22.5 * i / 180 * Math.PI);
+                lis[i].style.transform = 'translateX(' + x + 'px) translateY(' + y + 'px)';
+                lis[i].style.transition = i * 160 + 'ms ' + 0.3 + 's';
+
+            }
+        } else {
+            for(var i=0;i<5;i++){
+                var x=0;
+                var y=0;
+                lis[i].style.transform = 'translateX(' + x + 'px) translateY(' + y + 'px)';
+
+                lis[i].style.transition = (4-i)*100 + 'ms ' + 0.3 + 's';
+
+            }
+        }
+        isOpen = !isOpen;
+    }
+</script>
+</html>

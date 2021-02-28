@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../jquery-1.10.1.js"></script>
+    <script type="text/javascript">
+        $(function (){
+            // 查看按钮的次数
+            var $btns=$('button')
+            console.log($btns.length, $btns.size())
+
+            // 当我们将jquery对象使用下标提取对象进行操作时，提取的对象会从jquery对象中分离，也就是说提取的对象
+            // 会重新变为dom对象，从而无法使用jquery对象中的方法
+            // console.log($btns[1].html())    // 报错
+            console.log($btns[1].innerHTML)    // 测试二
+
+            // 输出所有button标签的文本
+            $btns.each(function (){
+                console.log(this.innerHTML)
+            })
+
+            // index   返回的是索引值
+            console.log($('#btn3').index())
+        })
+
+    </script>
+</head>
+<body>
+    <button>测试一</button>
+    <button>测试二</button>
+    <button id="btn3">测试三</button>
+    <button>测试四</button>
+</body>
+</html>

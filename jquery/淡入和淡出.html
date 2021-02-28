@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery-1.10.1.js"></script>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+<button id="btn1">慢慢淡出</button>
+<button id="btn2">慢慢淡入</button>
+<button id="btn3">淡出/淡入切换</button>
+<div id="box1"></div>
+<p>vnsosdosadndo</p>
+<script>
+    $('#btn1').click(function (){
+        $('#box1').fadeOut(200)
+    })
+
+    $('#btn2').click(function (){
+        $('#box1').fadeIn(200);
+    })
+
+    $('#btn3').click(function (){
+        $('#box1').fadeToggle(200)
+    })
+</script>
+</body>
+</html>

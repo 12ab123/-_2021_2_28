@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery-1.10.1.js"></script>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            margin-top: 30px;
+            position: relative;
+            left: 50px;
+        }
+    </style>
+</head>
+<body>
+<button id="btn1">立即显示</button>
+<button id="btn2">慢慢显示</button>
+<button id="btn3">隐藏</button>
+<button id="btn4">显示/隐藏切换</button>
+<button id="btn5">显示/隐藏切换</button>
+<div id="box1"></div>
+<p>vnsosdosadndo</p>
+
+<script>
+
+    // 扩大宽高
+   $('#btn1').click(function (){
+       $('#box1').animate({
+           width:'500px',
+           height:'500px'
+       },200)
+   })
+
+    // 先扩大高度，再扩大宽度
+    $('#btn2').click(function (){
+        $('#box1').animate({
+            width:'500px'
+        },200).animate({
+            height:'500px'
+        },500)
+    })
+
+    $('#btn3').click(function (){
+        $('#box1').animate({
+            left:'+=100'
+        },2000)
+    })
+
+    $('#btn4').click(function (){
+        $('#box1').animate({
+            left:'-=100'
+        },2000)
+    })
+
+    $('#btn5').click(function (){
+        $('#box1').stop(true,true)
+    })
+</script>
+</body>
+</html>

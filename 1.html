@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="box" title="AAA"></div>
+<script>
+    function BlueCat(name,age,gender){
+        this.name=name;
+        this.age=age;
+        this.gender=gender;
+    }
+    Object.prototype.run=function(){
+        console.log('跑的哼快');
+    };
+    var cat1=new BlueCat('tom',5,'male');
+    var cat2=new BlueCat('jerry',8,'male');
+
+    function add(a,b) {
+        return a+b;
+    }
+    // apply / call 方法可以改变一个函数的执行对象
+    // 把add的执行者window改成cat1，让car1有求和的方法
+    // apply的用法需要两个参数
+    // 第一个参数是执行对象的名字
+    // 第二个参数是函数所需要的值，并且值必须以数组的形式输入
+    // call和apply的区别是call中第二个参数不需要以数组的形式输入
+    var result=add.apply(cat1,[10,20]);
+    var result1=add.call(cat2,20,30);
+    console.log(result);
+    console.log(result1);
+    console.log(cat1);
+
+</script>
+</body>
+</html>

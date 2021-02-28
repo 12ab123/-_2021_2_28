@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        html,body{
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .warp{
+            width: 100%;
+            /*background-color: red;*/
+        }
+        .warp .content{
+            position: absolute;
+            width: 1100px;
+            height: 520px;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            background-color: #cccccc;
+        }
+        .warp .content .top{
+            width: 100%;
+            height: 100%;
+            position: relative;
+            list-style: none;
+        }
+        .warp .content .top li{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            visibility: hidden;
+        }
+        .warp .content .top li:nth-child(1){
+            background: #dc6c5f;
+        }
+        .warp .content .top li:nth-child(2){
+            background-color: #95dc84;
+        }
+        .warp .content .top li:nth-child(3){
+            background-color: #64b9d2;
+        }
+        .warp .content .top li:nth-child(4){
+            background-color: #000000;
+        }
+        .warp .content .top li>div{
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            line-height: 520px;
+            color: #ffffff;
+            font-size: 30px;
+        }
+        .warp .content ul li .text{
+
+        }
+        .warp .content .top>li.leftShow{
+            animation: 2s leftS linear;
+            visibility: visible;
+        }
+
+        .warp .content .top>li.rightHide{
+            animation: 2s rightH linear;
+            visibility: hidden;
+        }
+
+        @keyframes leftS {
+            0%{
+                visibility: visible;
+                transform: translateZ(-200px);
+            }
+            50%{
+                transform: translate(40%,0)rotate(30deg)scale(0.8);
+            }
+            100%{}
+        }
+        @keyframes rightH {
+            0%{
+                visibility: visible;
+            }
+            50%{
+                transform: translate(-40%,0)rotate(-30deg)scale(0.8);
+            }
+            100%{        transform: translateZ(200px);
+            }
+        }
+        .warp .content .icon{
+            list-style: none;
+            position: absolute;
+            left:50%;
+            bottom: 0;
+            transform: translate(-50%,0);
+        }
+        .warp .content .icon>li{
+            width: 20px;
+            height: 20px;
+            float: left;
+            border-radius: 50%;
+            margin: 2px;
+            background: rgba(255,255,255,0.5);
+            box-shadow: 0 0 4px rgba(25,25,25,0.8);
+        }
+        .warp .content .icon>li.active{
+            background-color: #ffffff;
+        }
+
+        #mask{
+            position: fixed;
+            top:0;
+            left:0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+        }
+        #mask>div{
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background-color: #009ee0;
+            transition: 1s height;
+        }
+        #mask>.maskTop{
+            top:0;
+        }
+        #mask>.maskBottom{
+            bottom: 0;
+        }
+        #mask>.maskLine{
+            position: absolute;
+            top:50%;
+            margin-top: -2px;
+            width: 0;
+            height: 4px;
+            background-color: #ffffff;
+            transition: 1s width;
+        }
+    </style>
+</head>
+<body>
+    <div class="warp">
+        <div id="mask">
+            <div class="maskTop"></div>
+            <div class="maskBottom"></div>
+            <span class="maskLine"></span>
+        </div>
+        <div class="content">
+            <ul class="top">
+                <li class="leftShow">
+                    <div class="text">2</div>
+                </li>
+                <li class="rightHide">
+                    <div class="text">1</div>
+                </li>
+                <li>
+                    <div class="text">3</div>
+                </li>
+                <li>
+                    <div class="text">4</div>
+                </li>
+            </ul>
+
+            <ul class="icon">
+                <li class="active"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <div >
+            <img src="img/logo.png" alt="">
+        </div>
+    </div>
+</body>
+<script>
+    window.onload=function (){
+        var warp=document.querySelector('.warp')
+        warp.style.height=document.documentElement.clientHeight+'px';
+
+
+        var iconList=document.querySelectorAll('.warp .content .icon>li')
+        var contentList=document.querySelectorAll('.warp .content .top>li')
+        for(var i=0;i<iconList.length;i++){
+            iconList[i].index=i
+            var a=0;
+            iconList[i].onclick=function (){
+
+                for(var j=0;j<iconList.length;j++){
+                    iconList[j].className=''
+                }
+                this.className='active'
+                for(var k=0;k<contentList.length;k++){
+                    contentList[k].className=''
+                }
+                contentList[this.index].className='leftShow'
+
+                // if(this.index==3){
+                //     this.index=1
+                //     contentList[this.index-1].className='rightHide'
+                // }
+                contentList[a].className='rightHide'
+                a=this.index
+
+
+
+            }
+        }
+        var maskLine=document.querySelector('.warp .mask .maskLine')
+        function loading(){
+            var imgFlag=0;
+            var arr=['logo.png']
+            for(var i=0;i<arr.length;i++){
+                var imgNode=new Image()
+                imgNode.src='img/'+arr[i]
+                imgNode.onload=function (){
+                    imgFlag++
+                    maskLine.style.width=imgFlag/arr.length*100+'%'
+                }
+            }
+        }
+        loading()
+    }
+</script>
+</html>

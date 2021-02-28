@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        #box{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            top:0;
+            left: 0;
+        }
+        body{
+            height: 2000px;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+</body>
+<script src="音悦台/js/transformCSS.js"></script>
+<script>
+    var box=document.getElementById('box');
+    box.addEventListener('touchstart',function (e) {
+    //   获取按下时触点的位置
+         this.size1=e.changedTouches[0].clientX;
+         this.sizeY=e.changedTouches[0].clientY;
+    //    获取按下时元素距离左侧的偏移量
+         this.size2=this.offsetLeft;
+         this.sizeY2=this.offsetTop;
+         console.log(transformCSS(box,'translateX'));
+    });
+
+    box.addEventListener('touchmove',function (e) {
+        this.size3=e.changedTouches[0].clientX;
+        this.sizeY3=e.changedTouches[0].clientY;
+
+        this.size4=this.size3-(box.size1-box.size2);
+        this.sizeY4=this.sizeY3-(box.sizeY-box.sizeY2);
+
+        //检测水平方向的位置
+        if(this.size4<=0){
+            this.size4=0;
+        }else if(this.size4>=document.documentElement.clientWidth-this.offsetWidth){
+            this.size4=document.documentElement.clientWidth-this.offsetWidth;
+        }
+        //检测垂直方向的位置
+        if(this.sizeY4<=0){
+            this.sizeY4=0;
+        }else if(this.sizeY4>=document.body.clientHeight-this.offsetHeight){
+            this.sizeY4=document.body.clientHeight-this.offsetHeight;
+        }
+        this.style.left=this.size4+'px';
+        this.style.top=this.sizeY4+'px';
+
+    });
+
+    box.addEventListener('touchend',function (e) {
+
+    });
+
+    document.documentElement.addEventListener('touchstart',function (e) {
+        e.preventDefault();
+    },{
+        passive:false
+    })
+</script>
+</html>

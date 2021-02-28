@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <title>画板</title>
+    <style>
+        canvas {
+            display: block;
+            margin: 100px auto;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+<canvas width="600px" height="500px"></canvas>
+</body>
+<script>
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
+    //标识变量
+    var isDown = false;
+
+    canvas.onmousedown = function (e) {
+        ctx.beginPath();
+        ctx.moveTo(e.offsetX, e.offsetY);
+        isDown = true;
+    };
+
+    canvas.onmousemove = function (e) {
+        if (isDown) {
+            ctx.lineTo(e.offsetX, e.offsetY);
+            ctx.stroke();
+        }
+
+    };
+
+    canvas.onmouseup = function () {
+        isDown = false;
+    }
+
+//    还有一种方法就是将onmousemove和onmouseup事件放入到onmousedown中,但是每次要移出onmousemove和onmouseup事件
+//    不然内存中会储存大量的onmousemove和onmouseup事件,占据内存
+</script>
+</html>

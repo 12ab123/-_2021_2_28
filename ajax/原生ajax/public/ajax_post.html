@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原生ajax_post</title>
+</head>
+<body>
+<h1>该页面是测试实验原生js发生post请求</h1>
+<button>aaaa</button>
+<div class="demo"></div>
+
+<script>
+    btn=document.querySelector('button')
+    btn.onclick=function(){
+        //1.实例化一个XMLHttpRequest对象
+        let xhr = new XMLHttpRequest()
+
+        //2.绑定一个名为onreadystatechange事件
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                //如果进入此判断,意味着: 请求成功了,数据已经回来了
+
+                console.log(xhr.response);
+                let demo=document.querySelector('.demo')
+                demo.innerHTML=xhr.response
+            }
+        }
+
+        //3.调用open方法---------- 用什么方法发?   给谁发?   带什么过去?
+        xhr.open('post', 'http://localhost:3000/ajax_post')
+
+
+        //特别注意: 此处设置post请求所特有的请求头,若不设置,服务器无法获取参数
+        //Content-Type: application/x-www-form-urlencoded
+        xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
+
+
+        //4.调用send方法 ------ 发送请求
+        xhr.send('name=laijiandong&age=19')
+    }
+
+
+</script>
+</body>
+</html>

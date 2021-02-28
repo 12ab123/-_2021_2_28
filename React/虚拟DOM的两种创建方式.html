@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test1"></div>
+    <div id="test2"></div>
+
+    
+    <!-- 引入react核心库 -->
+    <script src="js/react.development.js" type="text/javascript"></script>
+    <!-- 引入react.dom,用于操作dom -->
+    <script src="js/react-dom.development.js" type="text/javascript"></script>
+    <!-- 引入babel,用于解析jsx为js -->
+    <script src="js/babel.min.js" type="text/javascript"></script>
+    
+    <!-- 使用js语法创建虚拟DOM -->
+    <script  type="text/javascript">
+        let myID='aTGUIgu'
+        let myData='Hello World'
+
+        /*
+            1. 使用js语法创建虚拟DOM
+                React.createElement()
+                    第一个参数:   创建的标签类型
+                    第二个参数:   创建的标签的id
+                    第三个参数:   创建的标签中的值
+        */
+        let vDOM=React.createElement('h2',{id:myID.toLowerCase()},React.createElement('span',{},myData.toLowerCase()))
+        console.log(typeof vDOM)
+        let test2=document.querySelector('#test2')
+        debugger;
+
+        //2. 渲染虚拟DOM到页面上
+        ReactDOM.render(vDOM,document.getElementById('test1'))
+    </script>
+
+    <!-- 使用jsx语法创建虚拟DOM -->
+    <script  type="text/babel">
+    /*
+        1. 在jsx中类名属性写为className
+        2. 在jsx中只能有一个根标签
+        3. 在jsx中写入变量必须加上{}
+        4. 在jsx中标签必须闭合
+        
+    */
+        let vDOM2=(
+            <div>
+                <h2 id={myID.toUpperCase()}>
+                <span className='red'>          
+                    {myData.toUpperCase()}
+                </span>
+                </h2> 
+                <h1>你好</h1>   
+            </div>
+            )
+        ReactDOM.render(vDOM2,document.getElementById('test2'))
+    </script>
+
+    <!-- 
+        备注: 
+            虚拟DOM的本质,到底是什么?
+                js中的一般Oobject对象
+
+            虚拟DOM和真实DOM的区别
+                虚拟DOM比较"重",真实DOM比较"轻"
+                因为虚拟DOM上无需有过多的API
+     -->
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            执行流程:
+                js代码执行前,js引擎会创建一个执行环境,然后创建一个变量对象,收集this,变量,函数等
+                收集的变量对象内容: a=undefined  bar=undefined  foo=undefined
+                从上向下执行完后: a=10  bar=f()  foo=()
+                然后执行bar(10)
+                创建一个执行环境,收集变量: x=10  b=undefined
+                从上到下执行完后: x=10 b=5
+                然后执行foo(x+b)
+                创建一个执行环境,收集变量: y=15  c=undefined
+                从上到下执行完后: y=15 c=5
+                最后执行console.log(a+c+y)
+                结果: 30
+        
+        */
+        var a=10
+        var bar=function (x){
+            var b=5
+            foo(x+b)
+        }
+        var foo=function (y){
+            var c=5
+            console.log(a+c+y)
+        }
+        bar(10)
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../bootstrap/bootstrap-3.3.7/dist/css/bootstrap.css">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        #container {
+            width: 200px;
+            height: 100px;
+            margin: 100px auto;
+            /*border: 1px solid #ddd;*/
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transform: rotateX(-15deg);
+        }
+
+        img {
+            transition: 0.5s;
+            width: 200px;
+            height: 100px;
+            position: absolute;
+        }
+
+
+
+        button {
+            position: absolute;
+            left: 50%;
+            bottom: 20%;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <img src="../jquery/img/1.jpg" alt="">
+    <img src="../jquery/img/2.jpg" alt="">
+    <img src="../jquery/img/3.jpg" alt="">
+    <img src="../jquery/img/4.jpg" alt="">
+    <img src="../jquery/img/5.jpg" alt="">
+    <img src="../jquery/img/6.jpg" alt="">
+    <img src="../jquery/img/4.jpg" alt="">
+    <img src="../jquery/img/5.jpg" alt="">
+    <img src="../jquery/img/6.jpg" alt="">
+</div>
+
+<button content="btn btn-primary">点击旋转</button>
+</body>
+<script>
+    var imgs = document.querySelectorAll('img');
+    var btn = document.querySelector('button');
+    var step = 0;
+    imgs.forEach(function (img, index) {
+        img.style.transform = 'rotateY(' + index * 40 + 'deg) translateZ(400px)';
+    });
+
+    btn.onclick = function () {
+        step += 40;
+        imgs.forEach(function (img, index) {
+            img.style.transform = 'rotateY(' + (index * 40+step) + 'deg) translateZ(400px)';
+        })
+    }
+</script>
+</html>

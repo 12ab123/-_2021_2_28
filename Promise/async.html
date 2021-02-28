@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+            async函数的返回值为promise对象
+
+     */
+    async function main() {
+        //1. 如果返回值是一个非promise对象(状态: fulfilled;  值: return的值)
+        // return 521
+
+        //2. 如果返回的是一个promise对象(状态: 返回的对象的状态决定     值: 返回的对象的值)
+        // return new Promise((resolve, reject) => {
+        //     resolve('ok')
+        //     reject('no')
+        // })
+
+        //3. 抛出异常(状态: rejected;     值: 抛出的值)
+        throw 213
+    }
+
+    let result=main()
+    console.log(result);
+</script>
+</body>
+</html>

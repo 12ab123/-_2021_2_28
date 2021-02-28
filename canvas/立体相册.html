@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+
+            width: 200px;
+            height: 200px;
+            /*border: 1px solid #ddd;*/
+            margin: 100px auto;
+            transform-style: preserve-3d;
+            /*perspective: 1000px;*/
+            position: relative;
+            /*transform: rotateX(-45deg) rotateY(45deg);*/
+        }
+
+        img {
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0.5;
+        }
+
+        img:nth-child(1) {
+            transform: translateZ(100px);
+        }
+
+        img:nth-child(2) {
+            transform: rotateY(90deg) translateZ(100px);
+        }
+
+        img:nth-child(3) {
+            transform: translateZ(-100px);
+        }
+
+        img:nth-child(4) {
+            transform: rotateY(-90deg) translateZ(100px);
+        }
+
+        img:nth-child(5) {
+            transform: rotateX(90deg) translateZ(100px);
+        }
+
+        img:nth-child(6) {
+            transform: rotateX(90deg) translateZ(-100px);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <img src="../jquery/img/1.jpg" alt="">
+    <img src="../jquery/img/2.jpg" alt="">
+    <img src="../jquery/img/3.jpg" alt="">
+    <img src="../jquery/img/4.jpg" alt="">
+    <img src="../jquery/img/5.jpg" alt="">
+    <img src="../jquery/img/6.jpg" alt="">
+</div>
+</body>
+<script>
+    var container = document.querySelector('.container');
+    var a = 0;
+    setInterval(function () {
+        container.style.transform = 'rotateX(' + (a++) + 'deg) rotateY(' + (a++) + 'deg)'
+    }, 100);
+</script>
+</html>

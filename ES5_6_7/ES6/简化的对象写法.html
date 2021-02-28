@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script  type="text/javascript">
+        console.log('---------------对象的基本写法------------------')
+        let name='赖建东'
+        let age=18
+        let obj={
+            name:name,
+            age:age,
+            showName:function (){
+                console.log(this.name)
+            }
+        }
+        console.log(obj)
+
+        console.log('---------------对象的简写写法------------------')
+        let obj1={
+            name,       //同名的属性可省略
+            age,
+            showName1(){            //省略函数的function和:
+                console.log(this.name)
+            }
+        }
+        console.log(obj1)
+    </script>
+</body>
+</html>

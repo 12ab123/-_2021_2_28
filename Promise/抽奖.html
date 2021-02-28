@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button>点我抽奖</button>
+<script>
+    let btn = document.querySelector('button')
+    btn.onclick = function () {
+        new Promise((resolve, reject)=>{
+
+                let n=Math.round(Math.random()*99+1)
+                if(n<=30){
+                    resolve('抽到')
+                }else{6
+                    reject('没抽到')
+                }
+
+        }).then(
+            value => {alert(value)},
+            reason => {alert(reason)}
+        )
+    }
+</script>
+</body>
+</html>

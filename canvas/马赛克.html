@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas {
+            display: block;
+            margin: 50px auto;
+            border: solid 1px #000;
+        }
+    </style>
+</head>
+<body>
+<canvas></canvas>
+
+<script>
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
+
+    canvas.width = 600;
+    canvas.height = 500;
+
+
+    var img = new Image;
+    img.src = '../img/t1.jpg';
+    img.onload = function () {
+        ctx.drawImage(img, 0, 0, 600, 600 * img.height / img.width);
+
+        var imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        var size = 6;
+        for (var i = 0; i < canvas.width; i += size) {
+            for (var j = 0; j < canvas.height; j += size) {
+                var color = getPixel(imgData, i, j);
+                for (var a = i; a < i + size; a++) {
+                    for (var b = j; b < j + size; b++) {
+                        setPixel(imgData, a, b, color);
+                    }
+                }
+            }
+        }
+
+        ctx.putImageData(imgData, 0, 0);
+    };
+
+    function getPixel(imgData, x, y) {
+        var index = y * 4 * imgData.width + x * 4;
+        var d = [];
+        d[0] = imgData.data[index];
+        d[1] = imgData.data[index + 1];
+        d[2] = imgData.data[index + 2];
+        d[3] = imgData.data[index + 3];
+        return d;
+
+    }
+
+    function setPixel(imgData, x, y, colors) {
+        var index = y * 4 * imgData.width + x * 4;
+        imgData.data[index] = colors[0];
+        imgData.data[index + 1] = colors[1];
+        imgData.data[index + 2] = colors[2];
+        imgData.data[index + 3] = colors[3];
+    }
+
+
+</script>
+</body>
+</html>

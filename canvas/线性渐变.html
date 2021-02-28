@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        canvas {
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+<canvas></canvas>
+</body>
+<script>
+    var canvas = document.querySelector('canvas');
+    canvas.width = 600;
+    canvas.height = 500;
+    var ctx = canvas.getContext('2d');
+
+    //线性渐变
+    //参数1       起始水平位置
+    //参数2       起始垂直位置
+    //参数3       结尾水平位置
+    //参数4       结尾垂直位置
+    var gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+
+    //设置颜色
+    //第一个参数     从0开始都是第二个参数指定的颜色
+    //第二个参数     颜色
+    gradient.addColorStop(0,'red');
+    gradient.addColorStop(0.5,'yellow');
+    //    从0,2开始都是第二个参数指定的颜色
+    gradient.addColorStop(1,'blue');
+
+    //填充颜色
+    ctx.fillStyle = gradient;
+
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+</script>
+</html>

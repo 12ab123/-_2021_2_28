@@ -1,0 +1,34 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+ul {
+  list-style: none;
+}
+#app {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1.96rem 0.69333333rem 0;
+}
+#header {
+  width: 8.61333333rem;
+  height: 2.53333333rem;
+  background: #76d1a7;
+}
+#content {
+  width: 8.61333333rem;
+  padding-top: 0.57333333rem;
+  display: flex;
+  justify-content: space-between;
+}
+#content .left {
+  width: 1.68rem;
+  height: 5.42666667rem;
+  background: #c464a5;
+}
+#content .right {
+  width: 6.34666667rem;
+  height: 8.66666667rem;
+  background: #687cc3;
+}
+/*# sourceMappingURL=sekuai.css.map */

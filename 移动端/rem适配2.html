@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 37.5px">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <title>Title</title>
+    <style>
+        #box {
+            width: 4.24rem;
+            height: 2.373rem;
+            margin-left: 0.56rem;
+            margin-top: 5.333rem;
+            background: #886;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+</body>
+<script>
+    document.documentElement.style.fontSize = document.documentElement.clientWidth / 10 + 'px';
+    window.onresize=function () {
+        document.documentElement.style.fontSize = document.documentElement.clientWidth / 10 + 'px';
+
+    }
+</script>
+</html>

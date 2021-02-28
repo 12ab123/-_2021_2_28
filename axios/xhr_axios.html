@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button onclick="testGet()">发送get请求</button>
+<button onclick="testPost()">发送post请求</button>
+<button onclick="testPut()">发送put请求</button>
+<button onclick="testDelete()">发送delete请求</button>
+<script src="./node_modules/axios/dist/axios.js"></script>
+<script>
+    function testGet() {
+        axios({
+            method: 'get',
+            // url: 'http://localhost:3000/posts',
+            url: 'http://localhost:3000/posts',
+            //query参数可以单独指定,而params参数只能写在路径中
+            params:{            //指定query参数(等价于http://localhost:3000/posts?id=2)
+                id:2
+            }
+        }).then(
+            response => {
+                console.log(response.data, response.status, response.statusText)
+            },
+            err => {
+                console.log(err.message);
+            }
+        )
+    }
+
+    function testPost() {
+        axios({
+            method: 'POST',
+            url: 'http://localhost:3000/posts',
+            data:{              //指定请求体参数数据
+                title:'qqq',
+                author:'eee'
+            }
+        }).then(
+            response => {
+                console.log(response.data, response.status, response.statusText)
+            },
+            err => {
+                console.log(err.message);
+            }
+        )
+    }
+
+    function testPut() {
+        axios({
+            method: 'PUT',
+            url: 'http://localhost:3000/posts/2',
+            data:{//指定请求体参数数据
+                title:'111',
+                author:'222'
+            }
+        }).then(
+            response => {
+                console.log(response.data, response.status, response.statusText)
+            },
+            err => {
+                console.log(err.message);
+            }
+        )
+    }
+
+    function testDelete() {
+        axios({
+            method: 'DELETE',
+            url: 'http://localhost:3000/posts/2',
+        }).then(
+            response => {
+                console.log(response.data, response.status, response.statusText)
+            },
+            err => {
+                console.log(err.message);
+            }
+        )
+    }
+</script>
+</body>
+</html>

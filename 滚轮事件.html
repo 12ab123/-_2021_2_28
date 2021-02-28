@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+</body>
+<script>
+    // 滚轮事件
+    //     onmousewheel
+    //     触发条件：当我们滚动鼠标上的滚轮时，触发该条件
+    //     由于onmousewheel在火狐上不支持，所以我们需要添加多个事件
+    //     DOMMouseScroll
+
+
+    //     判断滚轮滚动的方向
+    //          event.wheelDelta
+    //            向上滚       120
+    //            向下滚       -120
+    //           通常我们只看正负，不看值
+    //      wheelDelta在火狐上不支持，所以我们使用detail
+    //      detail
+    //          向上滚     -3
+    //          向下滚     3
+
+
+    window.onload=function (){
+        var box=document.querySelector('div')
+        // 给指定元素添加多个事件，如果第一个不能使用，就使用第二个
+        box.addEventListener('mousewheel',fn)
+        box.addEventListener('DOMMouseScroll',fn)
+        var flag=true
+
+        function fn(event) {
+            event = event || window.event
+            if(event.wheelDelta>0||event.detail>0){
+                if(box.offsetHeight<20){
+                    return
+                }
+                box.style.height=box.offsetHeight-10+'px'
+            }else{
+                box.style.height=box.offsetHeight+10+'px'
+
+            }
+        }
+    }
+</script>
+</html>

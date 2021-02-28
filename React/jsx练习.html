@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test"></div>
+    <script src="js/react.development.js" type="text/javascript"></script>
+    <script src="js/react-dom.development.js" type="text/javascript"></script>
+    <script src="js/babel.min.js" type="text/javascript"></script>
+    <script  type="text/babel">
+        let data=["Angular","React","vue","jquery"]
+        
+        let vDOM=(<div>
+                    <h1>前端js框架列表</h1>
+                    <ul>
+                        {/*把数据的数组加工成标签的数组*/}
+                        {
+                            data.map((item,index)=>
+                                //我们暂时使用index作为每个元素的key,但是这种方式是不太可取的
+                                <li key={index}>{item}</li>
+                            )
+                        }
+                    </ul>
+                </div>)
+        ReactDOM.render(vDOM,document.querySelector('#test'))
+    </script>
+</body>
+</html>

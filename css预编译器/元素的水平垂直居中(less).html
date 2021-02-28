@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    <link rel="stylesheet" href="111.css">-->
+
+
+    <style rel="stylesheet" type="text/less">
+        @zero:0;
+        *{
+            padding: @zero;
+            margin: @zero;
+        }
+        #warp {
+            position: absolute;left: @zero;top: @zero;bottom: @zero;right: @zero;
+            margin: auto;
+            width: 500px;height: 500px;
+            background-color: yellow;
+            .box{
+                position: absolute; left: @zero; top: @zero; bottom: @zero; right: @zero;
+                margin: auto;
+                width: 200px;height: 200px;
+                background-color: red;
+            }
+
+        }
+    </style>
+    <script src="less.js"></script>
+</head>
+<body>
+<div id="warp">
+    <div class="box">
+        <div class="inner">
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
